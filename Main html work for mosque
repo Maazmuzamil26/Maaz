@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Umar Masjid Madrassah</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f5f1;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Hero Header */
+    header {
+      position: relative;
+      background: linear-gradient(135deg, #046d4a, #025937);
+      color: white;
+      text-align: center;
+      padding: 80px 20px 50px;
+      overflow: hidden;
+    }
+
+    header img {
+      width: 80px;
+      height: auto;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      animation: float 4s ease-in-out infinite, glow 3s ease-in-out infinite;
+      mix-blend-mode: multiply;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes glow {
+      0% { filter: drop-shadow(0 0 4px rgba(255,255,255,0.4)); }
+      50% { filter: drop-shadow(0 0 12px rgba(255,255,255,0.8)); }
+      100% { filter: drop-shadow(0 0 4px rgba(255,255,255,0.4)); }
+    }
+
+    /* Main Container */
+    main {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      margin-bottom: 50px;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      color: #046d4a;
+      margin-bottom: 25px;
+      border-bottom: 2px solid #d1e4db;
+      padding-bottom: 8px;
+      position: relative;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: #046d4a;
+      border-radius: 2px;
+    }
+
+    /* Cards */
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      flex: 1 1 300px;
+      padding: 25px 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+    }
+
+    .card h3 {
+      color: #025937;
+      margin-bottom: 10px;
+    }
+
+    /* Register Button */
+    .register-container {
+      text-align: center;
+      margin: 50px 0;
+    }
+
+    .register-btn {
+      background-color: #046d4a;
+      color: white;
+      border: none;
+      padding: 15px 45px;
+      font-size: 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+    }
+
+    .register-btn:hover {
+      background-color: #025937;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(4, 109, 74, 0.4);
+    }
+
+    footer {
+      background-color: #e0e5e2;
+      height: 60px;
+      margin-top: 60px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #f9f9f9;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-content h2 {
+      color: #046d4a;
+      margin-bottom: 20px;
+    }
+
+    .modal-content input,
+    .modal-content select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .modal-content button {
+      background-color: #046d4a;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .modal-content button:hover {
+      background-color: #025937;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      color: #046d4a;
+    }
+
+    @media (max-width: 750px) {
+      .cards {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <img src="ukim-logo.png" alt="Umar Masjid Madrassah Logo">
+  <h1>Umar Masjid Madrassah</h1>
+</header>
+
+<main>
+
+  <section>
+    <h2>Our Madrassah</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Why choose us?</h3>
+        <p>We hire the best of the best teachers to ensure quality learning for our students.</p>
+      </div>
+
+      <div class="card">
+        <h3>What to do?</h3>
+        <p>We offer everything in one place from level 0 (basic Arabic) to level 5 (advanced studies).</p>
+      </div>
+
+      <div class="card">
+        <h3>Always entertaining!</h3>
+        <p>Occasional events with fun activities, Islamic videos, and tasty food.</p>
+      </div>
+
+      <div class="card">
+        <h3>Opportunities</h3>
+        <p>Students can lead prayers, recite Qur’an, and give speeches to boost not only their public confidence but also there islamic knowledge.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="register-container">
+    <button class="register-btn" onclick="openModal()">Register Now</button>
+  </div>
+
+</main>
+
+<footer></footer>
+
+<!-- Modal -->
+<div id="registerModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2>Register for Madrassah</h2>
+    <form action="https://formspree.io/f/xrelqrrp" method="POST">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="number" name="age" placeholder="Age" required>
+      <input type="text" name="address" placeholder="Address" required>
+      <input type="tel" name="phone" placeholder="Phone Number" required>
+      <select name="level" required>
+        <option value="">Select Class Level</option>
+        <option value="0">Level 0 (Basics)</option>
+        <option value="1">Level 1</option>
+        <option value="2">Level 2</option>
+        <option value="3">Level 3</option>
+        <option value="4">Level 4</option>
+        <option value="5">Level 5 (Advanced)</option>
+      </select>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  function openModal() {
+    document.getElementById('registerModal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('registerModal').style.display = 'none';
+  }
+
+  window.onclick = function(event) {
+    const modal = document.getElementById('registerModal');
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  }
+</script>
+
+</body>
+</html>
+
