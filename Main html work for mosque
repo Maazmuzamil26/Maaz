@@ -179,15 +179,16 @@
         </p>
       </div>
 
-      <a href="islamic-studies.html" style="text-decoration:none; color:inherit;">
-      <div class="card">
-        <h3 data-en="Islamic Studies" data-ar="الدراسات الإسلامية" data-ur="اسلامی مطالعات">Islamic Studies</h3>
-        <p data-en="History, Fiqh, Hadith, and more."
-           data-ar="التاريخ والفقه والحديث والمزيد"
-           data-ur="تاریخ، فقہ، حدیث اور مزید۔">
-        </p>
-      </div>
-    </a>
+     <a href="islamic-studies.html" style="text-decoration:none; color:inherit;">
+  <div class="card">
+    <h3 data-en="Islamic Studies" data-ar="الدراسات الإسلامية" data-ur="اسلامی مطالعات">Islamic Studies</h3>
+    <p data-en="History, Fiqh, Hadith, and more."
+       data-ar="التاريخ والفقه والحديث والمزيد"
+       data-ur="تاریخ، فقہ، حدیث اور مزید۔">
+    </p>
+  </div>
+</a>
+
 
       <div class="card">
         <h3 data-en="Special Events" data-ar="فعاليات خاصة" data-ur="خصوصی تقریبات">Special Events</h3>
