@@ -4,213 +4,69 @@
   <meta charset="UTF-8">
   <title>Umar Masjid Madrassah</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Umar Masjid Madrassah offering Islamic education from beginner to advanced levels. Register today.">
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body { font-family: Arial, sans-serif; background-color: #f0f5f1; color:#333; line-height:1.6; transition: background 0.3s, color 0.3s;}
+    body.dark { background-color: #0f1f1a; color:#e0e0e0; }
 
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f5f1;
-      color: #333;
-      line-height: 1.6;
-    }
+    header { position: relative; background: linear-gradient(135deg, #046d4a, #025937); color:white; text-align:center; padding:80px 20px 50px; overflow:hidden;}
+    body.dark header { background: linear-gradient(135deg, #022f1f, #011f14); }
 
-    /* Hero Header */
-    header {
-      position: relative;
-      background: linear-gradient(135deg, #046d4a, #025937);
-      color: white;
-      text-align: center;
-      padding: 80px 20px 50px;
-      overflow: hidden;
-    }
+    header img { width:80px; position:absolute; top:20px; left:20px; animation: float 4s ease-in-out infinite, glow 3s ease-in-out infinite; }
+    @keyframes float { 0%{transform:translateY(0);} 50%{transform:translateY(-8px);} 100%{transform:translateY(0);} }
+    @keyframes glow { 0%{filter:drop-shadow(0 0 4px rgba(255,255,255,0.4));} 50%{filter:drop-shadow(0 0 12px rgba(255,255,255,0.8));} 100%{filter:drop-shadow(0 0 4px rgba(255,255,255,0.4));} }
 
-    header img {
-      width: 80px;
-      height: auto;
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      animation: float 4s ease-in-out infinite, glow 3s ease-in-out infinite;
-      mix-blend-mode: multiply;
-    }
+    header h1 { font-size:3rem; margin-bottom:10px; }
 
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-    }
+    .dua { margin-top:15px; font-size:1.2rem; opacity:0.95; }
+    body[lang="en"] .dua, body[lang="ar"] .dua, body[lang="ur"] .dua { font-style:normal; }
 
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-      100% { transform: translateY(0); }
-    }
+    /* Navigation Bar */
+    .nav-bar { margin-top:20px; }
+    .nav-bar ul { list-style:none; display:flex; justify-content:center; gap:25px; flex-wrap:wrap; padding:0; }
+    .nav-bar li { display:inline-block; }
+    .nav-bar button { background:none; border:none; color:white; font-weight:bold; font-size:16px; cursor:pointer; padding:6px 12px; border-radius:8px; transition: background 0.3s; }
+    .nav-bar button:hover { background: rgba(255,255,255,0.2); }
+    body.dark .nav-bar button { color:#a0f0c0; }
 
-    @keyframes glow {
-      0% { filter: drop-shadow(0 0 4px rgba(255,255,255,0.4)); }
-      50% { filter: drop-shadow(0 0 12px rgba(255,255,255,0.8)); }
-      100% { filter: drop-shadow(0 0 4px rgba(255,255,255,0.4)); }
-    }
+    .controls { margin-top:15px; }
+    .controls button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); color:white; padding: 8px 16px; border-radius: 20px; cursor: pointer; margin: 0 5px; }
 
-    /* Main Container */
-    main {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
+    main { max-width:1000px; margin:40px auto; padding:0 20px; }
 
-    section {
-      margin-bottom: 50px;
-    }
+    section h2 { font-size:2rem; color:#046d4a; margin-bottom:25px; border-bottom:2px solid #d1e4db; padding-bottom:8px; }
+    body.dark section h2 { color:#7fd1b2; }
 
-    section h2 {
-      font-size: 2rem;
-      color: #046d4a;
-      margin-bottom: 25px;
-      border-bottom: 2px solid #d1e4db;
-      padding-bottom: 8px;
-      position: relative;
-    }
+    .cards { display:flex; flex-wrap:wrap; gap:20px; }
+    .card { background:white; flex:1 1 300px; padding:25px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.08); transition:transform 0.3s ease, box-shadow 0.3s ease; animation:fadeUp 0.6s ease forwards; }
+    body.dark .card { background:#1b2f28; }
+    .card:hover { transform:translateY(-7px); box-shadow:0 12px 25px rgba(0,0,0,0.12); }
+    @keyframes fadeUp { from{opacity:0; transform:translateY(15px);} to{opacity:1; transform:translateY(0);} }
 
-    section h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 50px;
-      height: 3px;
-      background-color: #046d4a;
-      border-radius: 2px;
-    }
+    .register-container { text-align:center; margin:50px 0; }
+    .register-btn { background-color: #046d4a; color:white; border:none; padding:15px 45px; font-size:18px; border-radius:30px; cursor:pointer; }
 
-    /* Cards */
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
+    footer { background-color:#e0e5e2; height:60px; margin-top:60px; }
+    body.dark footer { background:#16241f; }
 
-    .card {
-      background: white;
-      flex: 1 1 300px;
-      padding: 25px 20px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+    .modal { display:none; position:fixed; inset:0; background-color:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:1000; }
+    .modal-content { background-color:#f9f9f9; padding:30px; border-radius:10px; width:90%; max-width:400px; position:relative; }
+    body.dark .modal-content { background:#1b2f28; color:white; }
 
-    .card:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.12);
-    }
+    label { display:block; margin-top:10px; font-size:14px; }
+    input, select, button { width:100%; padding:12px; margin-top:5px; border-radius:5px; border:1px solid #ccc; }
 
-    .card h3 {
-      color: #025937;
-      margin-bottom: 10px;
-    }
+    .close-btn { position:absolute; top:10px; right:15px; font-size:22px; cursor:pointer; }
 
-    /* Register Button */
-    .register-container {
-      text-align: center;
-      margin: 50px 0;
-    }
+    #thankYou { display:none; text-align:center; }
 
-    .register-btn {
-      background-color: #046d4a;
-      color: white;
-      border: none;
-      padding: 15px 45px;
-      font-size: 18px;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
-    }
-
-    .register-btn:hover {
-      background-color: #025937;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(4, 109, 74, 0.4);
-    }
-
-    footer {
-      background-color: #e0e5e2;
-      height: 60px;
-      margin-top: 60px;
-    }
-
-    /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.5);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background-color: #f9f9f9;
-      padding: 30px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-      position: relative;
-    }
-
-    .modal-content h2 {
-      color: #046d4a;
-      margin-bottom: 20px;
-    }
-
-    .modal-content input,
-    .modal-content select {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .modal-content button {
-      background-color: #046d4a;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      font-size: 16px;
-      border-radius: 25px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    .modal-content button:hover {
-      background-color: #025937;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 22px;
-      cursor: pointer;
-    }
-
-    .close-btn:hover {
-      color: #046d4a;
-    }
-
-    @media (max-width: 750px) {
-      .cards {
-        flex-direction: column;
-      }
+    @media (max-width: 600px) {
+      header h1 { font-size:2.2rem; }
+      header img { position:static; margin-bottom:15px; }
+      .cards { flex-direction:column; }
+      .nav-bar ul { flex-direction: column; gap:10px; }
     }
   </style>
 </head>
@@ -219,40 +75,129 @@
 
 <header>
   <img src="ukim-logo.png" alt="Umar Masjid Madrassah Logo">
-  <h1>Umar Masjid Madrassah</h1>
+
+  <h1 
+    data-en="Umar Masjid Madrassah"
+    data-ar="مدرسة مسجد عمر"
+    data-ur="عمر مسجد مدرسہ">
+    Umar Masjid Madrassah
+  </h1>
+
+  <p class="dua"
+     data-en="Rabbi zidni ‘ilmā — My Lord, increase me in knowledge."
+     data-ar="رَبِّ زِدْنِي عِلْمًا — ربي زدني علمًا"
+     data-ur="رَبِّ زِدْنِي عِلْمًا — اے میرے رب! مجھے علم میں اضافہ عطا فرما">
+    Rabbi zidni ‘ilmā — My Lord, increase me in knowledge.
+  </p>
+
+  <!-- Navigation -->
+  <nav class="nav-bar">
+    <ul>
+      <li><button onclick="showSection('home')" data-en="Home" data-ar="الصفحة الرئيسية" data-ur="ہوم">Home</button></li>
+      <li><button onclick="showSection('offerings')" data-en="What We Offer" data-ar="ما نقدمه" data-ur="ہم کیا پیش کرتے ہیں">What We Offer</button></li>
+      <li><button onclick="openModal()" data-en="Register" data-ar="التسجيل" data-ur="رجسٹر کریں">Register</button></li>
+    </ul>
+  </nav>
+
+  <div class="controls">
+    <button onclick="toggleDarkMode()">🌙 Dark</button>
+    <button onclick="toggleLanguage()">🌍 Language</button>
+  </div>
 </header>
 
 <main>
+  <!-- Home Section -->
+  <section id="home">
+    <h2 data-en="Our Madrassah" data-ar="مدرستنا" data-ur="ہمارا مدرسہ">Our Madrassah</h2>
 
-  <section>
-    <h2>Our Madrassah</h2>
     <div class="cards">
       <div class="card">
-        <h3>Why choose us?</h3>
-        <p>We hire the best of the best teachers to ensure quality learning for our students.</p>
+        <h3 data-en="Why choose us?" data-ar="لماذا تختارنا؟" data-ur="ہمیں کیوں منتخب کریں؟">Why choose us?</h3>
+        <p data-en="We hire the best teachers to ensure quality learning for our students."
+           data-ar="نختار أفضل المعلمين لضمان تعليم عالي الجودة للطلاب."
+           data-ur="ہم طلبہ کے لیے معیاری تعلیم کو یقینی بنانے کے لیے بہترین اساتذہ کا انتخاب کرتے ہیں۔">
+          We hire the best teachers to ensure quality learning for our students.
+        </p>
       </div>
 
       <div class="card">
-        <h3>What to do?</h3>
-        <p>We offer everything in one place from level 0 (basic Arabic) to level 5 (advanced studies).</p>
+        <h3 data-en="Our Curriculum" data-ar="منهجنا" data-ur="ہمارا نصاب">Our Curriculum</h3>
+        <p data-en="From level 0 (basic Arabic) to level 5 (advanced studies)."
+           data-ar="من المستوى 0 إلى المستوى 5."
+           data-ur="سطح 0 (بنیادی عربی) سے سطح 5 (اعلیٰ تعلیم) تک۔">
+          From level 0 (basic Arabic) to level 5 (advanced studies).
+        </p>
       </div>
 
       <div class="card">
-        <h3>Always entertaining!</h3>
-        <p>Occasional events with fun activities, Islamic videos, and tasty food.</p>
+        <h3 data-en="Always engaging" data-ar="دائمًا ممتع" data-ur="ہمیشہ دلچسپ">Always engaging</h3>
+        <p data-en="Events with fun activities, Islamic videos, and tasty food."
+           data-ar="فعاليات ممتعة ومقاطع إسلامية وطعام لذيذ."
+           data-ur="دلچسپ سرگرمیاں، اسلامی ویڈیوز اور لذیذ کھانا۔">
+          Events with fun activities, Islamic videos, and tasty food.
+        </p>
       </div>
 
       <div class="card">
-        <h3>Opportunities</h3>
-        <p>Students can lead prayers, recite Qur’an, and give speeches to boost not only their public confidence but also there islamic knowledge.</p>
+        <h3 data-en="Opportunities" data-ar="الفرص" data-ur="مواقع">Opportunities</h3>
+        <p data-en="Students can lead prayers, recite Qur’an, and give speeches."
+           data-ar="إمامة الصلاة وتلاوة القرآن."
+           data-ur="طلبہ نماز پڑھا سکتے ہیں، قرآن کی تلاوت اور تقاریر کر سکتے ہیں۔">
+          Students can lead prayers, recite Qur’an, and give speeches.
+        </p>
       </div>
+    </div>
+
+    <div class="register-container">
+      <button class="register-btn" onclick="openModal()"
+        data-en="Register Now"
+        data-ar="سجل الآن"
+        data-ur="ابھی رجسٹر کریں">
+        Register Now
+      </button>
     </div>
   </section>
 
-  <div class="register-container">
-    <button class="register-btn" onclick="openModal()">Register Now</button>
-  </div>
+  <!-- Offerings Section -->
+  <section id="offerings" style="display:none;">
+    <h2 data-en="Our Offerings" data-ar="خدماتنا" data-ur="ہماری پیشکشیں">Our Offerings</h2>
 
+    <div class="cards">
+      <div class="card">
+        <h3 data-en="Qur'an Classes" data-ar="دروس القرآن" data-ur="قرآن کی کلاسیں">Qur'an Classes</h3>
+        <p data-en="Learn to read, recite, and memorize the Qur’an."
+           data-ar="تعلم قراءة القرآن وحفظه"
+           data-ur="قرآن پڑھنا، تلاوت اور حفظ سیکھیں۔">
+        </p>
+      </div>
+
+      <div class="card">
+        <h3 data-en="Arabic Language" data-ar="اللغة العربية" data-ur="عربی زبان">Arabic Language</h3>
+        <p data-en="From beginner to advanced levels."
+           data-ar="من المبتدئين إلى المتقدمين"
+           data-ur="ابتدائی سے اعلی سطح تک۔">
+        </p>
+      </div>
+
+      <a href="islamic-studies.html" style="text-decoration:none; color:inherit;">
+      <div class="card">
+        <h3 data-en="Islamic Studies" data-ar="الدراسات الإسلامية" data-ur="اسلامی مطالعات">Islamic Studies</h3>
+        <p data-en="History, Fiqh, Hadith, and more."
+           data-ar="التاريخ والفقه والحديث والمزيد"
+           data-ur="تاریخ، فقہ، حدیث اور مزید۔">
+        </p>
+      </div>
+    </a>
+
+      <div class="card">
+        <h3 data-en="Special Events" data-ar="فعاليات خاصة" data-ur="خصوصی تقریبات">Special Events</h3>
+        <p data-en="Fun activities, community events, and competitions."
+           data-ar="أنشطة ممتعة وفعاليات مجتمعية ومسابقات"
+           data-ur="دلچسپ سرگرمیاں، کمیونٹی ایونٹس اور مقابلے۔">
+        </p>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer></footer>
@@ -260,44 +205,118 @@
 <!-- Modal -->
 <div id="registerModal" class="modal">
   <div class="modal-content">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
-    <h2>Register for Madrassah</h2>
-    <form action="https://formspree.io/f/xrelqrrp" method="POST">
-      <input type="text" name="name" placeholder="Full Name" required>
-      <input type="number" name="age" placeholder="Age" required>
-      <input type="text" name="address" placeholder="Address" required>
-      <input type="tel" name="phone" placeholder="Phone Number" required>
+    <span class="close-btn" onclick="closeModal()">×</span>
+
+    <form id="registerForm">
+      <h2 data-en="Register for Madrassah"
+          data-ar="التسجيل في المدرسة"
+          data-ur="مدرسہ میں رجسٹریشن">
+        Register for Madrassah
+      </h2>
+
+      <label data-en="Full Name" data-ar="الاسم الكامل" data-ur="پورا نام">Full Name</label>
+      <input type="text" name="name" required>
+
+      <label data-en="Age" data-ar="العمر" data-ur="عمر">Age</label>
+      <input type="number" name="age" min="3" max="80" required>
+
+      <label data-en="Address" data-ar="العنوان" data-ur="پتہ">Address</label>
+      <input type="text" name="address" required>
+
+      <label data-en="Phone Number" data-ar="رقم الهاتف" data-ur="فون نمبر">Phone Number</label>
+      <input type="tel" name="phone" required>
+
+      <label data-en="Class Level" data-ar="المستوى الدراسي" data-ur="درجہ">Class Level</label>
       <select name="level" required>
         <option value="">Select Class Level</option>
-        <option value="0">Level 0 (Basics)</option>
+        <option value="0">Level 0</option>
         <option value="1">Level 1</option>
         <option value="2">Level 2</option>
         <option value="3">Level 3</option>
         <option value="4">Level 4</option>
-        <option value="5">Level 5 (Advanced)</option>
+        <option value="5">Level 5</option>
       </select>
-      <button type="submit">Submit</button>
+
+      <button type="submit"
+        data-en="Submit"
+        data-ar="إرسال"
+        data-ur="جمع کریں">
+        Submit
+      </button>
     </form>
+
+    <div id="thankYou">
+      <h2 data-en="Thank You!" data-ar="شكرًا لك!" data-ur="شکریہ!">Thank You!</h2>
+      <p data-en="Your registration has been submitted successfully."
+         data-ar="تم إرسال تسجيلك بنجاح."
+         data-ur="آپ کی رجسٹریشن کامیابی سے جمع ہو گئی ہے۔">
+        Your registration has been submitted successfully.
+      </p>
+    </div>
+
   </div>
 </div>
 
 <script>
+  let dark = false;
+  let langIndex = 0;
+  const langs = ["en", "ar", "ur"];
+
+  function toggleDarkMode() {
+    dark = !dark;
+    document.body.classList.toggle("dark", dark);
+  }
+
+  function toggleLanguage() {
+    langIndex = (langIndex + 1) % langs.length;
+    const lang = langs[langIndex];
+
+    document.documentElement.lang = lang;
+    document.body.style.direction = lang === "en" ? "ltr" : "rtl";
+
+    document.querySelectorAll("[data-en]").forEach(el => {
+      el.textContent = el.dataset[lang];
+    });
+  }
+
   function openModal() {
-    document.getElementById('registerModal').style.display = 'flex';
+    document.getElementById("registerModal").style.display = "flex";
   }
 
   function closeModal() {
-    document.getElementById('registerModal').style.display = 'none';
+    document.getElementById("registerModal").style.display = "none";
+    document.getElementById("registerForm").reset();
+    document.getElementById("registerForm").style.display = "block";
+    document.getElementById("thankYou").style.display = "none";
   }
 
-  window.onclick = function(event) {
-    const modal = document.getElementById('registerModal');
-    if (event.target === modal) {
-      modal.style.display = 'none';
-    }
+  document.getElementById("registerForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    fetch("https://formspree.io/f/xrelqrrp", {
+      method: "POST",
+      body: new FormData(this),
+      headers: { "Accept": "application/json" }
+    }).then(res => {
+      if (res.ok) {
+        this.style.display = "none";
+        document.getElementById("thankYou").style.display = "block";
+      } else {
+        alert("Submission failed. Please try again.");
+      }
+    });
+  });
+
+  window.onclick = e => {
+    if (e.target.id === "registerModal") closeModal();
+  };
+
+  // Show sections
+  function showSection(sectionId) {
+    document.querySelectorAll("main section").forEach(sec => sec.style.display = "none");
+    document.getElementById(sectionId).style.display = "block";
   }
 </script>
 
 </body>
 </html>
-
