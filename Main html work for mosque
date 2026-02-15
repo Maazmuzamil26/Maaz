@@ -25,18 +25,18 @@ header h1{font-size:3rem;margin-bottom:10px}
 .dua{margin-top:15px;font-size:1.2rem;opacity:.95}
 
 /* ===== Navigation ===== */
-.nav-bar ul{list-style:none;display:flex;justify-content:center;gap:25px;flex-wrap:wrap;padding:0}
+.nav-bar ul{list-style:none;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;padding:0}
 .nav-bar li{display:inline-block}
 .nav-bar button{background:none;border:none;color:white;font-weight:bold;font-size:16px;cursor:pointer;padding:6px 12px;border-radius:8px;transition:background .3s}
 .nav-bar button:hover{background:rgba(255,255,255,.2)}
 body.dark .nav-bar button{color:#a0f0c0}
 
 /* ===== Controls ===== */
-.controls{margin-top:15px}
+.controls{margin-top:15px;text-align:center}
 .controls button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:white;padding:8px 16px;border-radius:20px;cursor:pointer;margin:0 5px}
 body.dark .controls button{color:#a0f0c0}
 
-/* ===== Main Sections ===== */
+/* ===== Sections ===== */
 main{max-width:1000px;margin:40px auto;padding:0 20px}
 section{display:none;animation:fadeUp .6s ease forwards}
 section.active{display:block}
@@ -69,6 +69,13 @@ input,select,button{width:100%;padding:12px;margin-top:5px;border-radius:5px;bor
 /* ===== Toast ===== */
 .toast{position:fixed;bottom:20px;right:20px;background:#046d4a;color:white;padding:12px 20px;border-radius:8px;display:none}
 
+/* ===== Prayer Table ===== */
+.prayer-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:15px}
+.prayer-table th, .prayer-table td{border:1px solid #ccc;padding:8px;text-align:center}
+.prayer-table th{background:#046d4a;color:white}
+body.dark .prayer-table th{background:#028a5e;color:#e0e0e0}
+body.dark .prayer-table td{color:#e0e0e0}
+
 /* ===== Responsive ===== */
 @media(max-width:600px){header h1{font-size:2.2rem}header img{position:static;margin-bottom:15px}.cards{flex-direction:column}.nav-bar ul{flex-direction:column;gap:10px}}
 </style>
@@ -80,7 +87,7 @@ input,select,button{width:100%;padding:12px;margin-top:5px;border-radius:5px;bor
 <h1 data-en="Umar Masjid Madrassah" data-ar="مدرسة مسجد عمر" data-ur="عمر مسجد مدرسہ">Umar Masjid Madrassah</h1>
 <p class="dua" data-en="Rabbi zidni ‘ilmā — My Lord, increase me in knowledge."
    data-ar="رَبِّ زِدْنِي عِلْمًا — ربي زدني علمًا"
-   data-ur="رَبِّ زِدْنِي عِلْمًا — اے میرے رب! مجھے علم میں اضافہ عطا فرما">
+   data-ur="رَبِّ زِدْنِي عَلْمًا — اے میرے رب! مجھے علم میں اضافہ عطا فرما">
    Rabbi zidni ‘ilmā — My Lord, increase me in knowledge.
 </p>
 
@@ -88,6 +95,8 @@ input,select,button{width:100%;padding:12px;margin-top:5px;border-radius:5px;bor
 <ul>
 <li><button onclick="showSection('home')" data-en="Home" data-ar="الصفحة الرئيسية" data-ur="ہوم">Home</button></li>
 <li><button onclick="showSection('offerings')" data-en="What We Offer" data-ar="ما نقدمه" data-ur="ہم کیا پیش کرتے ہیں">What We Offer</button></li>
+<li><button onclick="showSection('prayerTimes')" data-en="Prayer Times" data-ar="أوقات الصلاة" data-ur="نماز کے اوقات">Prayer Times</button></li>
+<li><button onclick="showSection('announcements')" data-en="Announcements" data-ar="الإعلانات" data-ur="اعلانات">Announcements</button></li>
 <li><button onclick="showSection('admin')" data-en="Admin" data-ar="الإدارة" data-ur="ایڈمن">Admin</button></li>
 <li><button onclick="openModal()" data-en="Register" data-ar="التسجيل" data-ur="رجسٹر کریں">Register</button></li>
 </ul>
@@ -99,286 +108,259 @@ input,select,button{width:100%;padding:12px;margin-top:5px;border-radius:5px;bor
 </div>
 </header>
 
-<main>
+<main id="editableContent">
+  <!-- Home Section -->
+  <section id="home" class="active" style="display:block">
+    <h2 data-en="Our Madrassah" data-ar="مدرستنا" data-ur="ہمارا مدرسہ">Our Madrassah</h2>
+    <div class="cards">
+      <div class="card">
+        <h3 data-en="Why choose us?" data-ar="لماذا تختارنا؟" data-ur="ہمیں کیوں منتخب کریں؟">Why choose us?</h3>
+        <p data-en="We hire the best teachers to ensure quality learning for our students."
+           data-ar="نختار أفضل المعلمين لضمان تعليم عالي الجودة للطلاب."
+           data-ur="ہم طلبہ کے لیے معیاری تعلیم کو یقینی بنانے کے لیے بہترین اساتذہ کا انتخاب کرتے ہیں۔">
+        We hire the best teachers to ensure quality learning for our students.
+        </p>
+      </div>
+      <div class="card">
+        <h3 data-en="Our Curriculum" data-ar="منهجنا" data-ur="ہمارا نصاب">Our Curriculum</h3>
+        <p data-en="From level 0 (basic Arabic) to level 5 (advanced studies)."
+           data-ar="من المستوى 0 إلى المستوى 5."
+           data-ur="سطح 0 (بنیادی عربی) سے سطح 5 (اعلیٰ تعلیم) تک۔">
+        From level 0 (basic Arabic) to level 5 (advanced studies).
+        </p>
+      </div>
+      <div class="card">
+        <h3 data-en="Always engaging" data-ar="دائمًا ممتع" data-ur="ہمیشہ دلچسپ">Always engaging</h3>
+        <p data-en="Events with fun activities, Islamic videos, and tasty food."
+           data-ar="فعاليات ممتعة ومقاطع إسلامية وطعام لذيذ."
+           data-ur="دلچسپ سرگرمیاں، اسلامی ویڈیوز اور لذیذ کھانا۔">
+        Events with fun activities, Islamic videos, and tasty food.
+        </p>
+      </div>
+      <div class="card">
+        <h3 data-en="Opportunities" data-ar="الفرص" data-ur="مواقع">Opportunities</h3>
+        <p data-en="Students can lead prayers, recite Qur’an, and give speeches."
+           data-ar="إمامة الصلاة وتلاوة القرآن."
+           data-ur="طلبہ نماز پڑھا سکتے ہیں، قرآن کی تلاوت اور تقاریر کر سکتے ہیں۔">
+        Students can lead prayers, recite Qur’an, and give speeches.
+        </p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <button class="primary" onclick="openModal()" data-en="Register Now" data-ar="سجل الآن" data-ur="ابھی رجسٹر کریں">Register Now</button>
+      <button class="secondary" onclick="payNow()" data-en="Pay & Register" data-ar="ادفع وسجل" data-ur="ادا کریں اور رجسٹر کریں">Pay & Register</button>
+    </div>
+  </section>
 
-<!-- ===== Home ===== -->
-<section id="home" class="active">
-<h2 data-en="Our Madrassah" data-ar="مدرستنا" data-ur="ہمارا مدرسہ">Our Madrassah</h2>
-<div class="cards">
-<div class="card">
-<h3 data-en="Why choose us?" data-ar="لماذا تختارنا؟" data-ur="ہمیں کیوں منتخب کریں؟">Why choose us?</h3>
-<p data-en="We hire the best teachers to ensure quality learning for our students."
-   data-ar="نختار أفضل المعلمين لضمان تعليم عالي الجودة للطلاب."
-   data-ur="ہم طلبہ کے لیے معیاری تعلیم کو یقینی بنانے کے لیے بہترین اساتذہ کا انتخاب کرتے ہیں۔">
-We hire the best teachers to ensure quality learning for our students.
-</p>
-</div>
+  <!-- Offerings Section -->
+  <section id="offerings">
+    <h2 data-en="Our Offerings" data-ar="خدماتنا" data-ur="ہماری پیشکشیں">Our Offerings</h2>
+    <div class="cards">
+      <div class="card"><h3 data-en="Qur'an Classes" data-ar="دروس القرآن" data-ur="قرآن کی کلاسیں">Qur'an Classes</h3>
+        <p data-en="Learn to read, recite, and memorize the Qur’an."
+           data-ar="تعلم قراءة القرآن وحفظه"
+           data-ur="قرآن پڑھنا، تلاوت اور حفظ سیکھیں۔"></p>
+      </div>
+      <div class="card"><h3 data-en="Arabic Language" data-ar="اللغة العربية" data-ur="عربی زبان">Arabic Language</h3>
+        <p data-en="From beginner to advanced levels."
+           data-ar="من المبتدئين إلى المتقدمين"
+           data-ur="ابتدائی سے اعلی سطح تک۔"></p>
+      </div>
+      <div class="card"><h3 data-en="Islamic Studies" data-ar="الدراسات الإسلامية" data-ur="اسلامی مطالعات">Islamic Studies</h3>
+        <p data-en="History, Fiqh, Hadith, and more."
+           data-ar="التاريخ والفقه والحديث والمزيد"
+           data-ur="تاریخ، فقہ، حدیث اور مزید۔"></p>
+      </div>
+      <div class="card"><h3 data-en="Special Events" data-ar="فعاليات خاصة" data-ur="خصوصی تقریبات">Special Events</h3>
+        <p data-en="Fun activities, community events, and competitions."
+           data-ar="أنشطة ممتعة وفعاليات مجتمعية ومسابقات"
+           data-ur="دلچسپ سرگرمیاں، کمیونٹی ایونٹس اور مقابلے۔"></p>
+      </div>
+    </div>
+  </section>
 
-<div class="card">
-<h3 data-en="Our Curriculum" data-ar="منهجنا" data-ur="ہمارا نصاب">Our Curriculum</h3>
-<p data-en="From level 0 (basic Arabic) to level 5 (advanced studies)."
-   data-ar="من المستوى 0 إلى المستوى 5."
-   data-ur="سطح 0 (بنیادی عربی) سے سطح 5 (اعلیٰ تعلیم) تک۔">
-From level 0 (basic Arabic) to level 5 (advanced studies).
-</p>
-</div>
+  <!-- Prayer Times Section -->
+  <section id="prayerTimes">
+    <h2 data-en="Prayer Times — Blackheath" data-ar="أوقات الصلاة — بلاكهيث" data-ur="نماز کے اوقات — بلیک ہیٹھ">Prayer Times — Blackheath</h2>
+    <table class="prayer-table" id="prayerTable">
+      <thead>
+        <tr>
+          <th>Day</th><th>Fajr</th><th>Dhuhr</th><th>Asr</th><th>Maghrib</th><th>Isha</th>
+        </tr>
+      </thead>
+      <tbody id="prayerTableBody"></tbody>
+    </table>
+  </section>
 
-<div class="card">
-<h3 data-en="Always engaging" data-ar="دائمًا ممتع" data-ur="ہمیشہ دلچسپ">Always engaging</h3>
-<p data-en="Events with fun activities, Islamic videos, and tasty food."
-   data-ar="فعاليات ممتعة ومقاطع إسلامية وطعام لذيذ."
-   data-ur="دلچسپ سرگرمیاں، اسلامی ویڈیوز اور لذیذ کھانا۔">
-Events with fun activities, Islamic videos, and tasty food.
-</p>
-</div>
+  <!-- Announcements Section -->
+  <section id="announcements">
+    <h2 data-en="Announcements" data-ar="الإعلانات" data-ur="اعلانات">Announcements</h2>
+    <ul id="announcementList">
+      <li>Welcome back to Madrassah! Classes start next Monday.</li>
+      <li>Special Ramadan sessions every Friday evening.</li>
+      <li>Annual Quiz Competition on 20th February.</li>
+    </ul>
+  </section>
 
-<div class="card">
-<h3 data-en="Opportunities" data-ar="الفرص" data-ur="مواقع">Opportunities</h3>
-<p data-en="Students can lead prayers, recite Qur’an, and give speeches."
-   data-ar="إمامة الصلاة وتلاوة القرآن."
-   data-ur="طلبہ نماز پڑھا سکتے ہیں، قرآن کی تلاوت اور تقاریر کر سکتے ہیں۔">
-Students can lead prayers, recite Qur’an, and give speeches.
-</p>
-</div>
-</div>
-
-<div style="text-align:center;margin-top:40px">
-<button class="primary" onclick="openModal()" data-en="Register Now" data-ar="سجل الآن" data-ur="ابھی رجسٹر کریں">Register Now</button>
-<button class="secondary" onclick="payNow()" data-en="Pay & Register" data-ar="ادفع وسجل" data-ur="ادا کریں اور رجسٹر کریں">Pay & Register</button>
-</div>
-
-<div class="testimonial active">"Amazing environment and teachers!"</div>
-<div class="testimonial">"My child loves attending every week."</div>
-<div class="testimonial">"Professional and well organised."</div>
-</section>
-
-<!-- ===== Offerings ===== -->
-<section id="offerings">
-<h2 data-en="Our Offerings" data-ar="خدماتنا" data-ur="ہماری پیشکشیں">Our Offerings</h2>
-<div class="cards">
-<div class="card"><h3 data-en="Qur'an Classes" data-ar="دروس القرآن" data-ur="قرآن کی کلاسیں">Qur'an Classes</h3>
-<p data-en="Learn to read, recite, and memorize the Qur’an."
-   data-ar="تعلم قراءة القرآن وحفظه"
-   data-ur="قرآن پڑھنا، تلاوت اور حفظ سیکھیں۔"></p>
-</div>
-<div class="card"><h3 data-en="Arabic Language" data-ar="اللغة العربية" data-ur="عربی زبان">Arabic Language</h3>
-<p data-en="From beginner to advanced levels."
-   data-ar="من المبتدئين إلى المتقدمين"
-   data-ur="ابتدائی سے اعلی سطح تک۔"></p>
-</div>
-<div class="card"><h3 data-en="Islamic Studies" data-ar="الدراسات الإسلامية" data-ur="اسلامی مطالعات">Islamic Studies</h3>
-<p data-en="History, Fiqh, Hadith, and more."
-   data-ar="التاريخ والفقه والحديث والمزيد"
-   data-ur="تاریخ، فقہ، حدیث اور مزید۔"></p>
-</div>
-<div class="card"><h3 data-en="Special Events" data-ar="فعاليات خاصة" data-ur="خصوصی تقریبات">Special Events</h3>
-<p data-en="Fun activities, community events, and competitions."
-   data-ar="أنشطة ممتعة وفعاليات مجتمعية ومسابقات"
-   data-ur="دلچسپ سرگرمیاں، کمیونٹی ایونٹس اور مقابلے۔"></p>
-</div>
-</div>
-</section>
-
-<!-- ===== Admin ===== -->
-<section id="admin" class="admin-panel">
-  <h2> Admin Control Center</h2>
-
-  <div id="loginBox">
-    <input type="password" id="adminPin" placeholder="Enter Admin PIN">
-    <button class="primary" onclick="adminLogin()">Enter</button>
-  </div>
-
-  <div id="adminContent" style="display:none">
-    <button onclick="enableEditMode()">Enable Edit Mode</button>
-    <button onclick="savePage()">💾 Save Changes</button>
-    <button class="secondary" onclick="adminLogout()">Logout</button>
-  </div>
-</section>
-
-
+  <!-- Admin Section -->
+  <section id="admin">
+    <h2>Admin Control Center</h2>
+    <div id="loginBox">
+      <input type="password" id="adminPin" placeholder="Enter Admin PIN">
+      <button class="primary" onclick="adminLogin()">Enter</button>
+    </div>
+    <div id="adminContent" style="display:none">
+      <button onclick="enableEditMode()">Enable Edit Mode</button>
+      <button onclick="savePage()">💾 Save Changes</button>
+      <button class="secondary" onclick="adminLogout()">Logout</button>
+    </div>
+  </section>
 </main>
 
 <footer>© 2026 Umar Masjid Madrassah</footer>
 
-<!-- ===== Registration Modal ===== -->
-<div id="modal" class="modal">
-<div class="modal-content">
-<span class="close-btn" onclick="closeModal()">×</span>
-<form id="registerForm">
-<h2 data-en="Register for Madrassah" data-ar="التسجيل في المدرسة" data-ur="مدرسہ میں رجسٹریشن">Register for Madrassah</h2>
-
-<label data-en="Full Name" data-ar="الاسم الكامل" data-ur="پورا نام">Full Name</label>
-<input type="text" name="name" required>
-<label data-en="Age" data-ar="العمر" data-ur="عمر">Age</label>
-<input type="number" name="age" min="3" max="80" required>
-<label data-en="Address" data-ar="العنوان" data-ur="پتہ">Address</label>
-<input type="text" name="address" required>
-<label data-en="Phone Number" data-ar="رقم الهاتف" data-ur="فون نمبر">Phone Number</label>
-<input type="tel" name="phone" required>
-<label data-en="Class Level" data-ar="المستوى الدراسي" data-ur="درجہ">Class Level</label>
-<select name="level" required>
-<option value="">Select Level</option>
-<option value="0">Level 0</option>
-<option value="1">Level 1</option>
-<option value="2">Level 2</option>
-<option value="3">Level 3</option>
-<option value="4">Level 4</option>
-<option value="5">Level 5</option>
-</select>
-<button type="submit" class="primary" data-en="Submit" data-ar="إرسال" data-ur="جمع کریں">Submit</button>
-</form>
-
-<div id="thankYou" style="display:none">
-<h2 data-en="Thank You!" data-ar="شكرًا لك!" data-ur="شکریہ!">Thank You!</h2>
-<p data-en="Your registration has been submitted successfully." data-ar="تم إرسال تسجيلك بنجاح." data-ur="آپ کی رجسٹریشن کامیابی سے جمع ہو گئی ہے۔">
-Your registration has been submitted successfully.
-</p>
-</div>
-</div>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<!-- ===== Scripts ===== -->
-<script src="https://js.stripe.com/v3/"></script>
 <script>
 /* ===== Dark Mode ===== */
-let dark=localStorage.getItem("dark")==="true"
-document.body.classList.toggle("dark",dark)
+let dark=localStorage.getItem("dark")==="true";
+document.body.classList.toggle("dark",dark);
 function toggleDarkMode(){dark=!dark;document.body.classList.toggle("dark",dark);localStorage.setItem("dark",dark)}
 
 /* ===== Language Switch ===== */
-let langs=["en","ar","ur"],langIndex=0
+let langs=["en","ar","ur"],langIndex=0;
 function toggleLanguage(){
-langIndex=(langIndex+1)%langs.length
-let lang=langs[langIndex]
-document.documentElement.lang=lang
-document.body.dir=(lang==="ar"||lang==="ur")?"rtl":"ltr"
-document.querySelectorAll("[data-en]").forEach(el=>{if(el.dataset[lang])el.textContent=el.dataset[lang]})
+  langIndex=(langIndex+1)%langs.length;
+  let lang=langs[langIndex];
+  document.documentElement.lang=lang;
+  document.body.dir=(lang==="ar"||lang==="ur")?"rtl":"ltr";
+  document.querySelectorAll("[data-en]").forEach(el=>{if(el.dataset[lang])el.textContent=el.dataset[lang]});
 }
 
-/* ===== Sections ===== */
-function showSection(id){document.querySelectorAll("main section").forEach(s=>s.classList.remove("active"));document.getElementById(id).classList.add("active")}
+/* ===== Tabs ===== */
+function showSection(id){
+  document.querySelectorAll("main section").forEach(sec=>{sec.style.display="none";sec.classList.remove("active")});
+  const sec=document.getElementById(id);
+  if(sec){sec.style.display="block";sec.classList.add("active")}
+}
 
-/* ===== Modal ===== */
-const modal=document.getElementById("modal")
-function openModal(){modal.style.display="flex"}
-function closeModal(){modal.style.display="none";resetForm()}
-window.onclick=e=>{if(e.target===modal)closeModal()}
+/* ===== Prayer Times ===== */
+function loadWeeklyPrayerTimes(){
+  const tableBody=document.getElementById("prayerTableBody");
+  if(!tableBody) return;
+  const week=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+  const dummyTimes=[
+    ["05:00","12:30","15:45","18:10","19:30"],
+    ["05:01","12:30","15:46","18:11","19:31"],
+    ["05:02","12:31","15:46","18:12","19:31"],
+    ["05:03","12:31","15:47","18:12","19:32"],
+    ["05:04","12:32","15:47","18:13","19:33"],
+    ["05:05","12:32","15:48","18:14","19:34"],
+    ["05:06","12:33","15:48","18:15","19:35"]
+  ];
+  tableBody.innerHTML="";
+  for(let i=0;i<7;i++){
+    const row=document.createElement("tr");
+    row.innerHTML=`<td>${week[i]}</td><td>${dummyTimes[i][0]}</td><td>${dummyTimes[i][1]}</td><td>${dummyTimes[i][2]}</td><td>${dummyTimes[i][3]}</td><td>${dummyTimes[i][4]}</td>`;
+    tableBody.appendChild(row);
+  }
+}
 
-/* ===== Toast ===== */
-function showToast(msg){const t=document.getElementById("toast");t.innerText=msg;t.style.display="block";setTimeout(()=>t.style.display="none",3000)}
-
-/* ===== Form Submission & LocalStorage ===== */
-const form=document.getElementById("registerForm")
-form.addEventListener("submit",e=>{
-e.preventDefault()
-let data=new FormData(form)
-let name=data.get("name").trim()
-let age=parseInt(data.get("age"))
-let phone=data.get("phone").trim()
-let level=data.get("level")
-if(name.length<3)return showToast("Invalid name")
-if(age<3||age>80)return showToast("Invalid age")
-if(!/^[0-9+\-\s()]+$/.test(phone))return showToast("Invalid phone")
-if(!level)return showToast("Select level")
-let regs=JSON.parse(localStorage.getItem("regs")||"[]")
-regs.push({name,age,phone,level})
-localStorage.setItem("regs",JSON.stringify(regs))
-form.style.display="none"
-document.getElementById("thankYou").style.display="block"
-loadAdmin()
-showToast("Registered successfully")
-})
-function resetForm(){form.reset();form.style.display="block";document.getElementById("thankYou").style.display="none"}
-
-/* ===== Admin Dashboard ===== */
-// Default Admin PIN
-let adminPin = "2482013";
-
-// Login function
+/* ===== Admin ===== */
+let adminPin="2482013";
 function adminLogin(){
-  const pin = document.getElementById("adminPin").value;
-  if(pin === adminPin){
-    document.getElementById("loginBox").style.display = "none";
-    document.getElementById("adminContent").style.display = "block";
+  const pin=document.getElementById("adminPin").value;
+  if(pin===adminPin){
+    document.getElementById("loginBox").style.display="none";
+    document.getElementById("adminContent").style.display="block";
     showToast("Admin logged in!");
   } else showToast("Incorrect PIN");
 }
 
-function adminLogout() {
-  // Disable edit mode
-  document.body.contentEditable = "false";
-  document.body.style.outline = "none";
-
-  // Hide admin content, show login
-  document.getElementById("adminContent").style.display = "none";
-  document.getElementById("loginBox").style.display = "block";
-
-  // Optional: reset scroll position
-  window.scrollTo(0, 0);
-
+function adminLogout(){
+  document.body.contentEditable="false";
+  document.body.style.outline="none";
+  document.getElementById("adminContent").style.display="none";
+  document.getElementById("loginBox").style.display="block";
   showToast("Logged out!");
 }
 
-// Enable edit mode on the whole page
 function enableEditMode(){
-  document.body.contentEditable = "true";
-  document.body.style.outline = "2px dashed #046d4a";
+  document.body.contentEditable="true";
+  document.body.style.outline="2px dashed #046d4a";
   showToast("Edit mode enabled! Click and type anywhere.");
 }
 
-// Save changes to localStorage
+/* ===== Save and Load Admin Edits ===== */
 function savePage(){
-  // Only save header, main, footer
-  const content = document.querySelectorAll("header, main, footer");
-  let htmlContent = "";
-  content.forEach(el => htmlContent += el.outerHTML);
-  localStorage.setItem("savedPage", htmlContent);
+  const editable = document.getElementById("editableContent");
+  localStorage.setItem("savedPageContent", editable.innerHTML);
   showToast("Changes saved!");
 }
 
+function loadSavedPage(){
+  const saved = localStorage.getItem("savedPageContent");
+  if(saved){
+    const editable = document.getElementById("editableContent");
+    editable.innerHTML = saved;
+    // hide admin panel after load
+    const adminContent = document.getElementById("adminContent");
+    const loginBox = document.getElementById("loginBox");
+    if(adminContent) adminContent.style.display = "none";
+    if(loginBox) loginBox.style.display = "block";
+  }
+}
 
-// Load saved changes on page load
-window.addEventListener("load", () => {
-  const saved = localStorage.getItem("savedPage");
-  if(!saved) return;
-
-  // Load saved content into header, main, footer
-  const tempDiv = document.createElement("div");
-  tempDiv.innerHTML = saved;
-
-  const originalElements = document.querySelectorAll("header, main, footer");
-  const savedElements = tempDiv.querySelectorAll("header, main, footer");
-
-  originalElements.forEach((el, i) => {
-    el.innerHTML = savedElements[i].innerHTML;
-  });
-
-  // Ensure admin panel is hidden
-  const adminContent = document.getElementById("adminContent");
-  const loginBox = document.getElementById("loginBox");
-  if(adminContent) adminContent.style.display = "none";
-  if(loginBox) loginBox.style.display = "block";
-
-  document.body.contentEditable = "false";
-});
-
-
-// Simple toast function
+/* ===== Toast ===== */
 function showToast(msg){
   let t = document.getElementById("toast");
   if(!t){
-    t=document.createElement("div");
-    t.id="toast";
-    t.className="toast";
+    t = document.createElement("div");
+    t.id = "toast";
+    t.className = "toast";
     document.body.appendChild(t);
   }
-  t.innerText=msg;
-  t.style.display="block";
+  t.innerText = msg;
+  t.style.display = "block";
   setTimeout(()=>t.style.display="none",3000);
 }
 
+/* ===== Registration Modal ===== */
+const modal=document.createElement("div"); // placeholder, modal already in HTML
+
+function openModal(){document.getElementById("modal").style.display="flex"}
+function closeModal(){document.getElementById("modal").style.display="none";resetForm()}
+
+/* ===== Form Handling ===== */
+const form=document.getElementById("registerForm");
+if(form){
+  form.addEventListener("submit",e=>{
+    e.preventDefault();
+    let data=new FormData(form);
+    let name=data.get("name").trim();
+    let age=parseInt(data.get("age"));
+    let phone=data.get("phone").trim();
+    let level=data.get("level");
+    if(name.length<3)return showToast("Invalid name");
+    if(age<3||age>80)return showToast("Invalid age");
+    if(!/^[0-9+\-\s()]+$/.test(phone))return showToast("Invalid phone");
+    if(!level)return showToast("Select level");
+    let regs=JSON.parse(localStorage.getItem("regs")||"[]");
+    regs.push({name,age,phone,level});
+    localStorage.setItem("regs",JSON.stringify(regs));
+    form.style.display="none";
+    document.getElementById("thankYou").style.display="block";
+    showToast("Registered successfully");
+  });
+}
+
+function resetForm(){form.reset();form.style.display="block";document.getElementById("thankYou").style.display="none"}
+
+/* ===== Page Load ===== */
+window.addEventListener("load",()=>{
+  loadSavedPage();           // load admin edits first
+  loadWeeklyPrayerTimes();   // load prayer table
+  showSection("home");       // always start on Home
+});
 </script>
+
 </body>
 </html>
