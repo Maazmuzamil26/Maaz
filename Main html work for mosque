@@ -181,54 +181,18 @@ Students can lead prayers, recite Qur’an, and give speeches.
 
 <!-- ===== Admin ===== -->
 <section id="admin" class="admin-panel">
-<h2>🦇 Admin Control Center</h2>
+  <h2>🦇 Admin Control Center</h2>
 
-<div id="loginBox">
-<input type="password" id="adminPin" placeholder="Enter Admin PIN">
-<button class="primary" onclick="adminLogin()">Enter</button>
-</div>
+  <div id="loginBox">
+    <input type="password" id="adminPin" placeholder="Enter Admin PIN">
+    <button class="primary" onclick="adminLogin()">Enter</button>
+  </div>
 
-<div id="adminContent" style="display:none">
-
-<h3>🔐 Change PIN</h3>
-<input type="password" id="newPin" placeholder="New PIN">
-<button onclick="changePin()">Save PIN</button>
-
-<hr><br>
-
-<h3>📝 Edit Homepage</h3>
-<input type="text" id="editTitle" placeholder="Edit Title">
-<input type="text" id="editMotto" placeholder="Edit Motto">
-<button onclick="saveContent()">Save Homepage</button>
-
-<hr><br>
-
-<h3>💳 Stripe Payment</h3>
-<input type="text" id="editStripe" placeholder="Stripe Payment Link">
-<button onclick="saveStripe()">Save Stripe</button>
-
-<hr><br>
-
-<h3>💬 Testimonials</h3>
-<input type="text" id="newTestimonial" placeholder="Add Testimonial">
-<button onclick="addTestimonial()">Add</button>
-<ul id="testimonialList"></ul>
-
-<hr><br>
-
-<h3>👥 Registrations</h3>
-<button onclick="exportData()">Export CSV</button>
-<table>
-<thead><tr>
-<th>Name</th><th>Age</th><th>Phone</th><th>Level</th><th>Delete</th>
-</tr></thead>
-<tbody id="adminTable"></tbody>
-</table>
-
-<br>
-<button class="secondary" onclick="adminLogout()">Logout</button>
-
-</div>
+  <div id="adminContent" style="display:none">
+    <button onclick="enableEditMode()">Enable Edit Mode</button>
+    <button onclick="savePage()">💾 Save Changes</button>
+    <button class="secondary" onclick="adminLogout()">Logout</button>
+  </div>
 </section>
 
 
@@ -329,120 +293,68 @@ showToast("Registered successfully")
 function resetForm(){form.reset();form.style.display="block";document.getElementById("thankYou").style.display="none"}
 
 /* ===== Admin Dashboard ===== */
-let ADMIN_PIN=localStorage.getItem("adminPin")||"1234"
+// Default Admin PIN
+let adminPin = "2482013";
 
+// Login function
 function adminLogin(){
-if(document.getElementById("adminPin").value===ADMIN_PIN){
-document.getElementById("loginBox").style.display="none"
-document.getElementById("adminContent").style.display="block"
-loadAdmin()
-loadSettings()
-}else showToast("Wrong PIN")
+  const pin = document.getElementById("adminPin").value;
+  if(pin === adminPin){
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("adminContent").style.display = "block";
+    showToast("Admin logged in!");
+  } else showToast("Incorrect PIN");
 }
 
-function adminLogout(){
-document.getElementById("loginBox").style.display="block"
-document.getElementById("adminContent").style.display="none"
+function adminLogout() {
+  // Disable edit mode
+  document.body.contentEditable = "false";
+  document.body.style.outline = "none";
+
+  // Hide admin content, show login
+  document.getElementById("adminContent").style.display = "none";
+  document.getElementById("loginBox").style.display = "block";
+
+  // Optional: reset scroll position
+  window.scrollTo(0, 0);
+
+  showToast("Logged out!");
 }
 
-function changePin(){
-let newPin=document.getElementById("newPin").value
-if(newPin.length<4)return showToast("PIN too short")
-ADMIN_PIN=newPin
-localStorage.setItem("adminPin",newPin)
-showToast("PIN changed")
+// Enable edit mode on the whole page
+function enableEditMode(){
+  document.body.contentEditable = "true";
+  document.body.style.outline = "2px dashed #046d4a";
+  showToast("Edit mode enabled! Click and type anywhere.");
 }
 
-function loadAdmin(){
-let regs=JSON.parse(localStorage.getItem("regs")||"[]")
-let table=document.getElementById("adminTable")
-table.innerHTML=""
-regs.forEach((r,i)=>{
-table.innerHTML+=`<tr>
-<td>${r.name}</td>
-<td>${r.age}</td>
-<td>${r.phone}</td>
-<td>${r.level}</td>
-<td><button onclick="deleteReg(${i})">X</button></td>
-</tr>`
-})
+// Save changes to localStorage
+function savePage(){
+  const htmlContent = document.body.innerHTML;
+  localStorage.setItem("savedPage", htmlContent);
+  showToast("Changes saved!");
 }
 
-function deleteReg(i){
-let regs=JSON.parse(localStorage.getItem("regs")||"[]")
-regs.splice(i,1)
-localStorage.setItem("regs",JSON.stringify(regs))
-loadAdmin()
+// Load saved changes on page load
+window.addEventListener("load",()=>{
+  const saved = localStorage.getItem("savedPage");
+  if(saved) document.body.innerHTML = saved;
+});
+
+// Simple toast function
+function showToast(msg){
+  let t = document.getElementById("toast");
+  if(!t){
+    t=document.createElement("div");
+    t.id="toast";
+    t.className="toast";
+    document.body.appendChild(t);
+  }
+  t.innerText=msg;
+  t.style.display="block";
+  setTimeout(()=>t.style.display="none",3000);
 }
 
-function exportData(){
-let regs=JSON.parse(localStorage.getItem("regs")||"[]")
-let csv="Name,Age,Phone,Level\n"
-regs.forEach(r=>csv+=`${r.name},${r.age},${r.phone},${r.level}\n`)
-let blob=new Blob([csv])
-let a=document.createElement("a")
-a.href=URL.createObjectURL(blob)
-a.download="registrations.csv"
-a.click()
-}
-
-/* EDIT CONTENT */
-function saveContent(){
-let title=document.getElementById("editTitle").value
-let motto=document.getElementById("editMotto").value
-if(title){document.getElementById("siteTitle").innerText=title;localStorage.setItem("title",title)}
-if(motto){document.getElementById("siteMotto").innerText=motto;localStorage.setItem("motto",motto)}
-showToast("Homepage updated")
-}
-
-function loadSettings(){
-document.getElementById("editTitle").value=localStorage.getItem("title")||""
-document.getElementById("editMotto").value=localStorage.getItem("motto")||""
-document.getElementById("editStripe").value=localStorage.getItem("stripe")||""
-loadTestimonials()
-}
-
-/* STRIPE */
-function saveStripe(){
-let link=document.getElementById("editStripe").value
-localStorage.setItem("stripe",link)
-showToast("Stripe link saved")
-}
-
-function payNow(){
-let link=localStorage.getItem("stripe")
-if(!link)return showToast("Stripe not set")
-window.location.href=link
-}
-
-/* TESTIMONIALS */
-function addTestimonial(){
-let text=document.getElementById("newTestimonial").value
-let tests=JSON.parse(localStorage.getItem("tests")||"[]")
-tests.push(text)
-localStorage.setItem("tests",JSON.stringify(tests))
-document.getElementById("newTestimonial").value=""
-loadTestimonials()
-}
-
-function loadTestimonials(){
-let tests=JSON.parse(localStorage.getItem("tests")||"[]")
-let list=document.getElementById("testimonialList")
-let container=document.getElementById("testimonialContainer")
-list.innerHTML=""
-container.innerHTML=""
-tests.forEach((t,i)=>{
-list.innerHTML+=`<li>${t} <button onclick="deleteTest(${i})">X</button></li>`
-container.innerHTML+=`<div class="testimonial">${t}</div>`
-})
-}
-
-function deleteTest(i){
-let tests=JSON.parse(localStorage.getItem("tests")||"[]")
-tests.splice(i,1)
-localStorage.setItem("tests",JSON.stringify(tests))
-loadTestimonials()
-}
 </script>
 </body>
 </html>
