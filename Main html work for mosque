@@ -181,7 +181,7 @@ Students can lead prayers, recite Qur’an, and give speeches.
 
 <!-- ===== Admin ===== -->
 <section id="admin" class="admin-panel">
-  <h2>🦇 Admin Control Center</h2>
+  <h2> Admin Control Center</h2>
 
   <div id="loginBox">
     <input type="password" id="adminPin" placeholder="Enter Admin PIN">
@@ -330,16 +330,40 @@ function enableEditMode(){
 
 // Save changes to localStorage
 function savePage(){
-  const htmlContent = document.body.innerHTML;
+  // Only save header, main, footer
+  const content = document.querySelectorAll("header, main, footer");
+  let htmlContent = "";
+  content.forEach(el => htmlContent += el.outerHTML);
   localStorage.setItem("savedPage", htmlContent);
   showToast("Changes saved!");
 }
 
+
 // Load saved changes on page load
-window.addEventListener("load",()=>{
+window.addEventListener("load", () => {
   const saved = localStorage.getItem("savedPage");
-  if(saved) document.body.innerHTML = saved;
+  if(!saved) return;
+
+  // Load saved content into header, main, footer
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = saved;
+
+  const originalElements = document.querySelectorAll("header, main, footer");
+  const savedElements = tempDiv.querySelectorAll("header, main, footer");
+
+  originalElements.forEach((el, i) => {
+    el.innerHTML = savedElements[i].innerHTML;
+  });
+
+  // Ensure admin panel is hidden
+  const adminContent = document.getElementById("adminContent");
+  const loginBox = document.getElementById("loginBox");
+  if(adminContent) adminContent.style.display = "none";
+  if(loginBox) loginBox.style.display = "block";
+
+  document.body.contentEditable = "false";
 });
+
 
 // Simple toast function
 function showToast(msg){
