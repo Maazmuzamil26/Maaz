@@ -95,7 +95,6 @@ body.dark .prayer-table td{color:#e0e0e0}
 <ul>
 <li><button onclick="showSection('home')" data-en="Home" data-ar="الصفحة الرئيسية" data-ur="ہوم">Home</button></li>
 <li><button onclick="showSection('offerings')" data-en="What We Offer" data-ar="ما نقدمه" data-ur="ہم کیا پیش کرتے ہیں">What We Offer</button></li>
-<li><button onclick="showSection('prayerTimes')" data-en="Prayer Times" data-ar="أوقات الصلاة" data-ur="نماز کے اوقات">Prayer Times</button></li>
 <li><button onclick="showSection('announcements')" data-en="Announcements" data-ar="الإعلانات" data-ur="اعلانات">Announcements</button></li>
 <li><button onclick="showSection('admin')" data-en="Admin" data-ar="الإدارة" data-ur="ایڈمن">Admin</button></li>
 <li><button onclick="openModal()" data-en="Register" data-ar="التسجيل" data-ur="رجسٹر کریں">Register</button></li>
@@ -179,18 +178,7 @@ body.dark .prayer-table td{color:#e0e0e0}
     </div>
   </section>
 
-  <!-- Prayer Times Section -->
-  <section id="prayerTimes">
-    <h2 data-en="Prayer Times — Blackheath" data-ar="أوقات الصلاة — بلاكهيث" data-ur="نماز کے اوقات — بلیک ہیٹھ">Prayer Times — Blackheath</h2>
-    <table class="prayer-table" id="prayerTable">
-      <thead>
-        <tr>
-          <th>Day</th><th>Fajr</th><th>Dhuhr</th><th>Asr</th><th>Maghrib</th><th>Isha</th>
-        </tr>
-      </thead>
-      <tbody id="prayerTableBody"></tbody>
-    </table>
-  </section>
+
 
   <!-- Announcements Section -->
   <section id="announcements">
@@ -216,6 +204,46 @@ body.dark .prayer-table td{color:#e0e0e0}
     </div>
   </section>
 </main>
+<!-- Registration Modal -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">×</span>
+    <h2 data-en="Register" data-ar="التسجيل" data-ur="رجسٹر کریں">Register</h2>
+    
+    <form id="registerForm">
+      <label data-en="Full Name" data-ar="الاسم الكامل" data-ur="پورا نام">Full Name</label>
+      <input type="text" name="name" placeholder="John Doe" required>
+
+      <label data-en="Age" data-ar="العمر" data-ur="عمر">Age</label>
+      <input type="number" name="age" placeholder="10" min="3" max="80" required>
+
+      <label data-en="Level" data-ar="المستوى" data-ur="سطح">Level</label>
+      <select name="level" required>
+        <option value="" disabled selected>Select Level</option>
+        <option value="0">Level 0 - Beginner</option>
+        <option value="1">Level 1</option>
+        <option value="2">Level 2</option>
+        <option value="3">Level 3</option>
+        <option value="4">Level 4</option>
+        <option value="5">Level 5 - Advanced</option>
+      </select>
+
+      <label data-en="Phone Number" data-ar="رقم الهاتف" data-ur="فون نمبر">Phone Number</label>
+      <input type="tel" name="phone" placeholder="+44 7000 000000" required>
+
+      <label data-en="Email Address" data-ar="البريد الإلكتروني" data-ur="ای میل پتہ">Email Address</label>
+      <input type="email" name="email" placeholder="example@mail.com" required>
+
+      <button type="submit" class="primary" data-en="Submit" data-ar="إرسال" data-ur="جمع کروائیں">Submit</button>
+    </form>
+
+    <div id="thankYou" style="display:none; text-align:center; margin-top:15px;">
+      <p data-en="Thank you for registering!" data-ar="شكرا لتسجيلك!" data-ur="رجسٹریشن کا شکریہ!">
+        Thank you for registering!
+      </p>
+    </div>
+  </div>
+</div>
 
 <footer>© 2026 Umar Masjid Madrassah</footer>
 
@@ -242,27 +270,6 @@ function showSection(id){
   if(sec){sec.style.display="block";sec.classList.add("active")}
 }
 
-/* ===== Prayer Times ===== */
-function loadWeeklyPrayerTimes(){
-  const tableBody=document.getElementById("prayerTableBody");
-  if(!tableBody) return;
-  const week=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
-  const dummyTimes=[
-    ["05:00","12:30","15:45","18:10","19:30"],
-    ["05:01","12:30","15:46","18:11","19:31"],
-    ["05:02","12:31","15:46","18:12","19:31"],
-    ["05:03","12:31","15:47","18:12","19:32"],
-    ["05:04","12:32","15:47","18:13","19:33"],
-    ["05:05","12:32","15:48","18:14","19:34"],
-    ["05:06","12:33","15:48","18:15","19:35"]
-  ];
-  tableBody.innerHTML="";
-  for(let i=0;i<7;i++){
-    const row=document.createElement("tr");
-    row.innerHTML=`<td>${week[i]}</td><td>${dummyTimes[i][0]}</td><td>${dummyTimes[i][1]}</td><td>${dummyTimes[i][2]}</td><td>${dummyTimes[i][3]}</td><td>${dummyTimes[i][4]}</td>`;
-    tableBody.appendChild(row);
-  }
-}
 
 /* ===== Admin ===== */
 let adminPin="2482013";
@@ -360,6 +367,7 @@ window.addEventListener("load",()=>{
   loadWeeklyPrayerTimes();   // load prayer table
   showSection("home");       // always start on Home
 });
+
 </script>
 
 </body>
