@@ -49,8 +49,21 @@ header h1{font-size:3rem;margin-bottom:10px}
 /* ===== Navigation ===== */
 .nav-bar ul{list-style:none;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;padding:0}
 .nav-bar li{display:inline-block}
-.nav-bar button{background:none;border:none;color:white;font-weight:bold;font-size:16px;cursor:pointer;padding:6px 12px;border-radius:8px;transition:background .3s}
-.nav-bar button:hover{background:rgba(255,255,255,.2)}
+.nav-bar button{
+  background:none;
+  border:none;
+  color:white;
+  font-weight:600;
+  font-size:14px;
+  cursor:pointer;
+  padding:4px 10px;
+  border-radius:6px;
+  transition:all .25s;
+}
+
+.nav-bar ul{
+  gap:12px;
+}.nav-bar button:hover{background:rgba(255,255,255,.2)}
 body.dark .nav-bar button{color:#a0f0c0}
 
 /* ===== Controls ===== */
@@ -60,7 +73,17 @@ body.dark .controls button{color:#a0f0c0}
 
 /* ===== Sections ===== */
 main{max-width:1000px;margin:40px auto;padding:0 20px}
-section{display:none;animation:fadeUp .6s ease forwards}
+/* Hide ALL sections by default */
+section {
+  display: none;
+}
+
+section.active {
+  display: block;
+  animation: fadeUp .4s ease;
+}
+  animation: fadeUp .4s ease;
+}
 section.active{display:block}
 @keyframes fadeUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
 section h2{font-size:2rem;color:#046d4a;margin-bottom:25px;border-bottom:2px solid #d1e4db;padding-bottom:8px}
@@ -90,13 +113,6 @@ input,select,button{width:100%;padding:12px;margin-top:5px;border-radius:5px;bor
 
 /* ===== Toast ===== */
 .toast{position:fixed;bottom:20px;right:20px;background:#046d4a;color:white;padding:12px 20px;border-radius:8px;display:none}
-
-/* ===== Prayer Table ===== */
-.prayer-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:15px}
-.prayer-table th, .prayer-table td{border:1px solid #ccc;padding:8px;text-align:center}
-.prayer-table th{background:#046d4a;color:white}
-body.dark .prayer-table th{background:#028a5e;color:#e0e0e0}
-body.dark .prayer-table td{color:#e0e0e0}
 
 /* ===== Responsive ===== */
 @media(max-width:600px){header h1{font-size:2.2rem}header img{position:static;margin-bottom:15px}.cards{flex-direction:column}.nav-bar ul{flex-direction:column;gap:10px}}
@@ -133,250 +149,488 @@ body.dark .prayer-table td{color:#e0e0e0}
 <button onclick="toggleLanguage()">🌍</button>
 </div>
 </header>
-
-<main>
-  <div id="contentArea">
-    <section id="curriculum">
-<h2>Structured Curriculum</h2>
+<!-- ================= CURRICULUM ================= -->
+<section id="curriculum">
+<h2 data-en="Structured Curriculum"
+    data-ar="المنهج المنظم"
+    data-ur="منظم نصاب">
+Structured Curriculum
+</h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>Children (5–10)</h3>
+<h3 data-en="Children (5–10)"
+    data-ar="الأطفال (5–10)"
+    data-ur="بچے (5–10)">
+Children (5–10)
+</h3>
 <ul>
-<li>Arabic Alphabet & Reading</li>
-<li>Short Surah Memorisation</li>
-<li>Basic Salah & Duas</li>
-<li>Islamic Manners</li>
+<li data-en="Arabic Alphabet & Reading" data-ar="الحروف العربية والقراءة" data-ur="عربی حروف اور پڑھنا">Arabic Alphabet & Reading</li>
+<li data-en="Short Surah Memorisation" data-ar="حفظ السور القصيرة" data-ur="چھوٹی سورتوں کا حفظ">Short Surah Memorisation</li>
+<li data-en="Basic Salah & Duas" data-ar="أساسيات الصلاة والأدعية" data-ur="نماز اور دعائیں">Basic Salah & Duas</li>
+<li data-en="Islamic Manners" data-ar="الآداب الإسلامية" data-ur="اسلامی آداب">Islamic Manners</li>
 </ul>
 </div>
 
 <div class="card">
-<h3>Youth (11–16)</h3>
+<h3 data-en="Youth (11–16)"
+    data-ar="الشباب (11–16)"
+    data-ur="نوجوان (11–16)">
+Youth (11–16)
+</h3>
 <ul>
-<li>Tajweed Rules</li>
-<li>Fiqh of Worship</li>
-<li>Seerah Studies</li>
-<li>Public Speaking</li>
+<li data-en="Tajweed Rules" data-ar="أحكام التجويد" data-ur="تجوید کے قواعد">Tajweed Rules</li>
+<li data-en="Fiqh of Worship" data-ar="فقه العبادات" data-ur="فقہ عبادات">Fiqh of Worship</li>
+<li data-en="Seerah Studies" data-ar="دراسة السيرة" data-ur="سیرت کا مطالعہ">Seerah Studies</li>
+<li data-en="Public Speaking" data-ar="مهارات الخطابة" data-ur="تقریر کی مہارت">Public Speaking</li>
 </ul>
 </div>
 
 <div class="card">
-<h3>Adults</h3>
+<h3 data-en="Adults"
+    data-ar="الكبار"
+    data-ur="بالغ">
+Adults
+</h3>
 <ul>
-<li>Advanced Tajweed</li>
-<li>Tafsir Introduction</li>
-<li>Hadith Studies</li>
-<li>Community Leadership</li>
+<li data-en="Advanced Tajweed" data-ar="التجويد المتقدم" data-ur="اعلیٰ تجوید">Advanced Tajweed</li>
+<li data-en="Tafsir Introduction" data-ar="مقدمة في التفسير" data-ur="تفسیر کا تعارف">Tafsir Introduction</li>
+<li data-en="Hadith Studies" data-ar="دراسة الحديث" data-ur="حدیث کا مطالعہ">Hadith Studies</li>
+<li data-en="Community Leadership" data-ar="القيادة المجتمعية" data-ur="کمیونٹی قیادت">Community Leadership</li>
 </ul>
 </div>
 
 </div>
 </section>
 
+<!-- ================= PROGRESS ================= -->
 <section id="progress">
-<h2>Student Progress Tracker</h2>
+<h2 data-en="Student Progress Tracker"
+    data-ar="متابعة تقدم الطلاب"
+    data-ur="طلبہ کی پیشرفت">
+Student Progress Tracker
+</h2>
 
 <div class="card">
-<input type="text" id="studentName" placeholder="Student Name">
-<input type="text" id="memorisation" placeholder="Surahs Completed">
-<input type="text" id="attendance" placeholder="Attendance %">
-<button onclick="saveProgress()">Save Progress</button>
-<button onclick="generateCertificate()">Generate Certificate</button>
+<input type="text" id="studentName"
+ placeholder="Student Name"
+ data-en-placeholder="Student Name"
+ data-ar-placeholder="اسم الطالب"
+ data-ur-placeholder="طالب کا نام">
+
+<input type="text" id="memorisation"
+ placeholder="Surahs Completed"
+ data-en-placeholder="Surahs Completed"
+ data-ar-placeholder="السور المكتملة"
+ data-ur-placeholder="مکمل سورتیں">
+
+<input type="text" id="attendance"
+ placeholder="Attendance %"
+ data-en-placeholder="Attendance %"
+ data-ar-placeholder="نسبة الحضور %"
+ data-ur-placeholder="حاضری %">
+
+<button onclick="saveProgress()"
+ data-en="Save Progress"
+ data-ar="حفظ التقدم"
+ data-ur="پیشرفت محفوظ کریں">
+Save Progress
+</button>
+
+<button onclick="generateCertificate()"
+ data-en="Generate Certificate"
+ data-ar="إنشاء شهادة"
+ data-ur="سرٹیفکیٹ بنائیں">
+Generate Certificate
+</button>
 </div>
 
-<div id="progressList">
-</div>
-
+<div id="progressList"></div>
 </section>
 
+<!-- ================= TEACHERS ================= -->
 <section id="teachers">
-<h2>Our Teachers</h2>
+<h2 data-en="Our Teachers"
+    data-ar="معلمونا"
+    data-ur="ہمارے اساتذہ">
+Our Teachers
+</h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>Ustadh Ahmad</h3>
-<p>10 years teaching experience. Specialised in Tajweed & Hifz.</p>
+<h3>Ustadh Hicham</h3>
+<p data-en="10 years teaching experience. Specialised in Tajweed & Arabic understanding."
+   data-ar="خبرة 10 سنوات في التدريس ومتخصص في التجويد وفهم اللغة العربية."
+   data-ur="10 سالہ تدریسی تجربہ، تجوید اور عربی فہم میں مہارت۔">
+10 years teaching experience. Specialised in Tajweed & Arabic understanding.
+</p>
 </div>
 
 <div class="card">
-<h3>Ustadha Fatimah</h3>
-<p>Arabic language specialist. Focus on youth development.</p>
+<h3>Ustadh Abdul Wali</h3>
+<p data-en="Hifz specialist. Great attitude towards Hifz class."
+   data-ar="متخصص في الحفظ ويتمتع بروح إيجابية."
+   data-ur="حفظ کے ماہر اور بہترین انداز تدریس رکھتے ہیں۔">
+Hifz specialist. Great attitude towards Hifz class.
+</p>
+</div>
+
+<div class="card">
+<h3>Ustadha Ruskhana</h3>
+<p data-en="Experienced female youth teacher."
+   data-ar="معلمة خبيرة لفئة الشباب."
+   data-ur="نوجوان لڑکیوں کی تجربہ کار معلمہ۔">
+Experienced female youth teacher.
+</p>
+</div>
+
+<div class="card">
+<h3>Ustadh Muhammad Tayeb</h3>
+<p data-en="Head teacher with strong leadership skills."
+   data-ar="مدرس أول يتمتع بمهارات قيادية قوية."
+   data-ur="ہیڈ ٹیچر، مضبوط قیادت کی صلاحیتوں کے ساتھ۔">
+Head teacher with strong leadership skills.
+</p>
+</div>
+
+<div class="card">
+<h3>Ustadha Naila</h3>
+<p data-en="Event organiser and class helper."
+   data-ar="منظمة فعاليات ومساعدة صف."
+   data-ur="تقریبات کی منتظم اور کلاس معاون۔">
+Event organiser and class helper.
+</p>
+</div>
+
+<div class="card">
+<h3>Ustadha Aisha</h3>
+<p data-en="Young girls class teacher."
+   data-ar="معلمة صف الفتيات."
+   data-ur="لڑکیوں کی کلاس کی معلمہ۔">
+Young girls class teacher.
+</p>
 </div>
 
 </div>
 </section>
 
+<!-- ================= CALENDAR ================= -->
 <section id="calendar">
-<h2>Academic Calendar</h2>
+<h2 data-en="Academic Calendar"
+    data-ar="التقويم الأكاديمي"
+    data-ur="تعلیمی کیلنڈر">
+Academic Calendar
+</h2>
 <ul>
-<li>Spring Term: March – June</li>
-<li>Ramadan Program: Special Schedule</li>
-<li>Exams: End of Each Term</li>
-<li>Eid Break: Announced yearly</li>
-</ul>
-</section>
+<li data-en="Spring Term: March – June"
+    data-ar="الفصل الربيعي: مارس – يونيو"
+    data-ur="اسپرنگ ٹرم: مارچ تا جون">
+Spring Term: March – June
+</li>
 
-<section id="achievements">
-<h2>Student Achievements</h2>
+<li data-en="Ramadan Program: Special Schedule"
+    data-ar="برنامج رمضان: جدول خاص"
+    data-ur="رمضان پروگرام: خصوصی شیڈول">
+Ramadan Program: Special Schedule
+</li>
 
-<div class="cards">
-<div class="card">
-<h3>Student of the Month</h3>
-<p>Coming soon</p>
-</div>
+<li data-en="Exams: End of Each Term"
+    data-ar="الاختبارات: نهاية كل فصل"
+    data-ur="امتحانات: ہر ٹرم کے اختتام پر">
+Exams: End of Each Term
+</li>
 
-<div class="card">
-<h3>Hifz Milestones</h3>
-<p>Track major memorisation achievements</p>
-</div>
-</div>
-
-</section>
-
-<section id="resources">
-<h2>Learning Resources</h2>
-
-<ul>
-<li>Printable Tajweed Chart</li>
-<li>Homework Sheets</li>
-<li>Recommended Reading:
-  <ul>
-    <li>Riyad as-Salihin</li>
-    <li>The Sealed Nectar</li>
-  </ul>
+<li data-en="Eid Break: Announced yearly"
+    data-ar="عطلة العيد: تُعلن سنويًا"
+    data-ur="عید کی تعطیلات: سالانہ اعلان">
+Eid Break: Announced yearly
 </li>
 </ul>
 </section>
-  <!-- Home Section -->
-  <section id="home" class="active" style="display:block">
-    <h2 data-en="Our Madrassah" data-ar="مدرستنا" data-ur="ہمارا مدرسہ">Our Madrassah</h2>
-    <div class="cards">
-      <div class="card">
-        <h3 data-en="Why choose us?" data-ar="لماذا تختارنا؟" data-ur="ہمیں کیوں منتخب کریں؟">Why choose us?</h3>
-        <p data-en="We hire the best teachers to ensure quality learning for our students."
-           data-ar="نختار أفضل المعلمين لضمان تعليم عالي الجودة للطلاب."
-           data-ur="ہم طلبہ کے لیے معیاری تعلیم کو یقینی بنانے کے لیے بہترین اساتذہ کا انتخاب کرتے ہیں۔">
-        We hire the best teachers to ensure quality learning for our students.
-        </p>
-      </div>
-      <div class="card">
-        <h3 data-en="Our Curriculum" data-ar="منهجنا" data-ur="ہمارا نصاب">Our Curriculum</h3>
-        <p data-en="From level 0 (basic Arabic) to level 5 (advanced studies)."
-           data-ar="من المستوى 0 إلى المستوى 5."
-           data-ur="سطح 0 (بنیادی عربی) سے سطح 5 (اعلیٰ تعلیم) تک۔">
-        From level 0 (basic Arabic) to level 5 (advanced studies).
-        </p>
-      </div>
-      <div class="card">
-        <h3 data-en="Always engaging" data-ar="دائمًا ممتع" data-ur="ہمیشہ دلچسپ">Always engaging</h3>
-        <p data-en="Events with fun activities, Islamic videos, and tasty food."
-           data-ar="فعاليات ممتعة ومقاطع إسلامية وطعام لذيذ."
-           data-ur="دلچسپ سرگرمیاں، اسلامی ویڈیوز اور لذیذ کھانا۔">
-        Events with fun activities, Islamic videos, and tasty food.
-        </p>
-      </div>
-      <div class="card">
-        <h3 data-en="Opportunities" data-ar="الفرص" data-ur="مواقع">Opportunities</h3>
-        <p data-en="Students can lead prayers, recite Qur’an, and give speeches."
-           data-ar="إمامة الصلاة وتلاوة القرآن."
-           data-ur="طلبہ نماز پڑھا سکتے ہیں، قرآن کی تلاوت اور تقاریر کر سکتے ہیں۔">
-        Students can lead prayers, recite Qur’an, and give speeches.
-        </p>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:40px">
-      <button class="primary" onclick="openModal()" data-en="Register Now" data-ar="سجل الآن" data-ur="ابھی رجسٹر کریں">Register Now</button>
-      <button class="secondary" onclick="payNow()" data-en="Pay & Register" data-ar="ادفع وسجل" data-ur="ادا کریں اور رجسٹر کریں">Pay & Register</button>
-    </div>
-  </section>
 
-  <section id="offerings">
-  <h2 data-en="Our Offerings" data-ar="خدماتنا" data-ur="ہماری پیشکشیں">Our Offerings</h2>
+<!-- ================= ACHIEVEMENTS ================= -->
+<section id="achievements">
+<h2 data-en="Student Achievements"
+    data-ar="إنجازات الطلاب"
+    data-ur="طلبہ کی کامیابیاں">
+Student Achievements
+</h2>
+
+<div class="cards">
+<div class="card">
+<h3 data-en="Student of the Month"
+    data-ar="طالب الشهر"
+    data-ur="مہینے کا بہترین طالب علم">
+Student of the Month
+</h3>
+<p data-en="Coming soon"
+   data-ar="قريبًا"
+   data-ur="جلد آرہا ہے">
+Coming soon
+</p>
+</div>
+
+<div class="card">
+<h3 data-en="Hifz Milestones"
+    data-ar="إنجازات الحفظ"
+    data-ur="حفظ کے سنگ میل">
+Hifz Milestones
+</h3>
+<p data-en="Track major memorisation achievements"
+   data-ar="متابعة إنجازات الحفظ الكبيرة"
+   data-ur="اہم حفظ کی کامیابیوں کا ریکارڈ">
+Track major memorisation achievements
+</p>
+</div>
+</div>
+</section>
+
+<!-- ================= RESOURCES ================= -->
+<section id="resources">
+<h2 data-en="Learning Resources"
+    data-ar="الموارد التعليمية"
+    data-ur="تعلیمی وسائل">
+Learning Resources
+</h2>
+
+<ul>
+<li data-en="Printable Tajweed Chart"
+    data-ar="مخطط التجويد القابل للطباعة"
+    data-ur="پرنٹ ایبل تجوید چارٹ">
+Printable Tajweed Chart
+</li>
+
+<li data-en="Homework Sheets"
+    data-ar="أوراق الواجب"
+    data-ur="ہوم ورک شیٹس">
+Homework Sheets
+</li>
+
+<li data-en="Recommended Reading"
+    data-ar="قراءة موصى بها"
+    data-ur="تجویز کردہ کتب">
+Recommended Reading
+<ul>
+<li data-en="Islamic Studies Level 1–10"
+    data-ar="الدراسات الإسلامية المستوى 1–10"
+    data-ur="اسلامک اسٹڈیز لیول 1–10">
+Islamic Studies Level 1–10
+</li>
+<li data-en="Quran and Qaida"
+    data-ar="القرآن والقاعدة"
+    data-ur="قرآن اور قائدہ">
+Quran and Qaida
+</li>
+</ul>
+</li>
+</ul>
+</section>
+
+</div>
+
+  </div>
+<main id="mainContent">
+  <div id="contentArea">
+</div>
+</div>
+<main id="mainContent">
+  <div id="contentArea">
+<!-- ================= HOME ================= -->
+<section id="home" class="active">
+  <h2>Welcome to Our Madrassah</h2>
+
+  <div class="card">
+    <h3>Why Choose Us?</h3>
+    <p>
+      We provide structured Islamic education in a positive and engaging environment.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Our Mission</h3>
+    <p>
+      To help students grow in knowledge, character, and confidence.
+    </p>
+  </div>
+
+  <div style="margin-top:30px;">
+    <button onclick="alert('Register clicked')">
+      Register Now
+    </button>
+  </div>
+</section>
+<!-- ================= OFFERINGS ================= -->
+<section id="offerings">
+  <h2>Our Offerings</h2>
   <div class="cards">
 
     <div class="card">
-      <h3 data-en="Qur'an Classes" data-ar="دروس القرآن" data-ur="قرآن کی کلاسیں">
-        Qur'an Classes
-      </h3>
-      <p data-en="Learn to read, recite, and memorize the Qur’an."
-         data-ar="تعلم قراءة القرآن وحفظه"
-         data-ur="قرآن پڑھنا، تلاوت اور حفظ سیکھیں۔">
-         Learn to read, recite, and memorize the Qur’an.
-      </p>
+      <h3>Qur'an Classes</h3>
+      <p>Learn to read, recite, and memorize the Qur’an.</p>
     </div>
 
     <div class="card">
-      <h3 data-en="Arabic Language" data-ar="اللغة العربية" data-ur="عربی زبان">
-        Arabic Language
-      </h3>
-      <p data-en="From beginner to advanced levels."
-         data-ar="من المبتدئين إلى المتقدمين"
-         data-ur="ابتدائی سے اعلی سطح تک۔">
-         From beginner to advanced levels.
-      </p>
+      <h3>Arabic Language</h3>
+      <p>From beginner to advanced levels.</p>
     </div>
 
     <div class="card">
-      <h3 data-en="Islamic Studies" data-ar="الدراسات الإسلامية" data-ur="اسلامی مطالعات">
-        Islamic Studies
-      </h3>
-      <p data-en="History, Fiqh, Hadith, and more."
-         data-ar="التاريخ والفقه والحديث والمزيد"
-         data-ur="تاریخ، فقہ، حدیث اور مزید۔">
-         History, Fiqh, Hadith, and more.
-      </p>
+      <h3>Islamic Studies</h3>
+      <p>History, Fiqh, Hadith, and more.</p>
     </div>
 
     <div class="card">
-      <h3 data-en="Special Events" data-ar="فعاليات خاصة" data-ur="خصوصی تقریبات">
-        Special Events
-      </h3>
-      <p data-en="Fun activities, community events, and competitions."
-         data-ar="أنشطة ممتعة وفعاليات مجتمعية ومسابقات"
-         data-ur="دلچسپ سرگرمیاں، کمیونٹی ایونٹس اور مقابلے۔">
-         Fun activities, community events, and competitions.
-      </p>
+      <h3>Special Events</h3>
+      <p>Fun activities, community events, and competitions.</p>
     </div>
 
   </div>
 </section>
 
-
-
-  <!-- Announcements Section -->
+<!-- ================= ANNOUNCEMENTS ================= -->
 <section id="announcements">
-  <h2 data-en="Announcements" data-ar="الإعلانات" data-ur="اعلانات">Announcements</h2>
-  <ul id="announcementList">
-    
-    <li 
-      data-en="Ramadan classes on Saturday and Sunday from 12pm to 3pm."
-      data-ar="دروس رمضان يومي السبت والأحد من الساعة 12 ظهرًا إلى 3 عصرًا."
-      data-ur="رمضان کی کلاسیں ہفتہ اور اتوار کو دوپہر 12 بجے سے 3 بجے تک۔">
-      Ramadan classes on Saturday and Sunday from 12pm to 3pm.
-    </li>
-
-    <li 
-      data-en="Unity Hifz class Iftar coming soon."
-      data-ar="إفطار صف حفظ الوحدة قريبًا."
-      data-ur="یونٹی حفظ کلاس کا افطار جلد آرہا ہے۔">
-      Unity Hifz class Iftar coming soon.
-    </li>
-
-    <li 
-      data-en="Upcoming Eid event and holidays."
-      data-ar="فعالية العيد القادمة والإجازات."
-      data-ur="آنے والا عید ایونٹ اور تعطیلات۔">
-      Upcoming Eid event and holidays.
-    </li>
-
+  <h2>Announcements</h2>
+  <ul>
+    <li>Ramadan classes on Saturday and Sunday from 12pm to 3pm.</li>
+    <li>Unity Hifz class Iftar coming soon.</li>
+    <li>Upcoming Eid event and holidays.</li>
   </ul>
 </section>
+
+<!-- ================= CURRICULUM ================= -->
+<section id="curriculum">
+  <h2>Structured Curriculum</h2>
+  <div class="cards">
+
+    <div class="card">
+      <h3>Children (5–10)</h3>
+      <ul>
+        <li>Arabic Alphabet & Reading</li>
+        <li>Short Surah Memorisation</li>
+        <li>Basic Salah & Duas</li>
+        <li>Islamic Manners</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Youth (11–16)</h3>
+      <ul>
+        <li>Tajweed Rules</li>
+        <li>Fiqh of Worship</li>
+        <li>Seerah Studies</li>
+        <li>Public Speaking</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Adults</h3>
+      <ul>
+        <li>Advanced Tajweed</li>
+        <li>Tafsir Introduction</li>
+        <li>Hadith Studies</li>
+        <li>Community Leadership</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= PROGRESS ================= -->
+<section id="progress">
+  <h2>Student Progress Tracker</h2>
+
+  <div class="card">
+    <input type="text" id="studentName" placeholder="Student Name">
+    <input type="text" id="memorisation" placeholder="Surahs Completed">
+    <input type="text" id="attendance" placeholder="Attendance %">
+    <button onclick="saveProgress()">Save Progress</button>
+    <button onclick="generateCertificate()">Generate Certificate</button>
   </div>
 
-  <!-- Admin Section -->
- <section id="admin">
+  <div id="progressList"></div>
+</section>
+
+<!-- ================= TEACHERS ================= -->
+<section id="teachers">
+  <h2>Our Teachers</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>Ustadh Hicham</h3>
+      <p>10 years teaching experience. Specialised in Tajweed & Arabic understanding.</p>
+    </div>
+
+    <div class="card">
+      <h3>Ustadh Abdul Wali</h3>
+      <p>Hifz specialist. Great attitude towards Hifz class.</p>
+    </div>
+
+    <div class="card">
+      <h3>Ustadha Ruskhana</h3>
+      <p>Experienced female youth teacher.</p>
+    </div>
+
+    <div class="card">
+      <h3>Ustadh Muhammad Tayeb</h3>
+      <p>Head teacher with strong leadership skills.</p>
+    </div>
+
+    <div class="card">
+      <h3>Ustadha Naila</h3>
+      <p>Event organiser and class helper.</p>
+    </div>
+
+    <div class="card">
+      <h3>Ustadha Aisha</h3>
+      <p>Young girls class teacher.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= CALENDAR ================= -->
+<section id="calendar">
+  <h2>Academic Calendar</h2>
+  <ul>
+    <li>Spring Term: March – June</li>
+    <li>Ramadan Program: Special Schedule</li>
+    <li>Exams: End of Each Term</li>
+    <li>Eid Break: Announced yearly</li>
+  </ul>
+</section>
+
+<!-- ================= ACHIEVEMENTS ================= -->
+<section id="achievements">
+  <h2>Student Achievements</h2>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Student of the Month</h3>
+      <p>Coming soon</p>
+    </div>
+
+    <div class="card">
+      <h3>Hifz Milestones</h3>
+      <p>Track major memorisation achievements</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESOURCES ================= -->
+<section id="resources">
+  <h2>Learning Resources</h2>
+  <ul>
+    <li>Printable Tajweed Chart</li>
+    <li>Homework Sheets</li>
+    <li>Recommended Reading</li>
+  </ul>
+</section>
+
+<!-- ================= ADMIN ================= -->
+<section id="admin">
   <h2>Admin Control Center</h2>
 
   <div id="loginBox">
@@ -385,12 +639,13 @@ body.dark .prayer-table td{color:#e0e0e0}
   </div>
 
   <div id="adminPanel" style="display:none">
- <button onclick="enableEditMode()">Enable Edit Mode</button>
-<button onclick="saveContent()">💾 Save Changes</button>
-<button onclick="restoreDefault()">Restore Default</button>
-<button class="secondary" onclick="adminLogout()">Logout</button>
+    <button onclick="enableEditMode()">Enable Edit Mode</button>
+    <button onclick="saveContent()">💾 Save Changes</button>
+    <button onclick="restoreDefault()">Restore Default</button>
+    <button class="secondary" onclick="adminLogout()">Logout</button>
   </div>
 </section>
+
 </main>
 <!-- Registration Modal -->
 <div id="modal" class="modal">
@@ -444,21 +699,33 @@ function toggleDarkMode(){dark=!dark;document.body.classList.toggle("dark",dark)
 /* ===== Language Switch ===== */
 let langs=["en","ar","ur"],langIndex=0;
 function toggleLanguage(){
-  langIndex=(langIndex+1)%langs.length;
-  let lang=langs[langIndex];
-  document.documentElement.lang=lang;
-  document.body.dir=(lang==="ar"||lang==="ur")?"rtl":"ltr";
-  document.querySelectorAll("[data-en]").forEach(el=>{if(el.dataset[lang])el.textContent=el.dataset[lang]});
-}
+  langIndex = (langIndex + 1) % langs.length;
+  let lang = langs[langIndex];
 
+  document.documentElement.lang = lang;
+  document.body.dir = (lang === "ar" || lang === "ur") ? "rtl" : "ltr";
+
+  document.querySelectorAll("[data-en]").forEach(el=>{
+    if(el.dataset[lang]){
+      el.textContent = el.dataset[lang];
+    }
+  });
+}
 /* ===== Tabs ===== */
 function showSection(id){
-  document.querySelectorAll("main section").forEach(sec=>{sec.style.display="none";sec.classList.remove("active")});
-  const sec=document.getElementById(id);
-  if(sec){sec.style.display="block";sec.classList.add("active")}
+
+  // Hide ALL sections everywhere
+  document.querySelectorAll("section").forEach(sec=>{
+    sec.classList.remove("active");
+  });
+
+  // Show selected one
+  const selected = document.getElementById(id);
+  if(selected){
+    selected.classList.add("active");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 }
-
-
 /* ============================= */
 /* 🔐 IMPROVED ADMIN SYSTEM */
 /* ============================= */
@@ -517,7 +784,8 @@ function enableEditMode(){
   const area = document.getElementById("contentArea");
 
   editMode = true;
-  area.contentEditable = "true";
+  document.querySelectorAll("#contentArea h2, #contentArea h3, #contentArea p, #contentArea li")
+  .forEach(el => el.contentEditable = "true");
   area.style.outline = "2px dashed #046d4a";
 
   disableProtectedElements(true);
@@ -568,10 +836,6 @@ function loadSavedContent(){
 }
 
 /* ===== AUTO LOGIN CHECK ===== */
-window.addEventListener("load", ()=>{
-  loadSavedContent();
-  showAdminPanel();
-});
 /* ===== Toast ===== */
 function showToast(msg){
   let t = document.getElementById("toast");
@@ -660,9 +924,10 @@ function generateCertificate(){
   win.print();
 }
 
-/* ===== Page Load ===== */
-window.addEventListener("load",()=>{
+window.addEventListener("DOMContentLoaded", () => {
   loadSavedContent();
+  showAdminPanel();
+  displayProgress();
   showSection("home");
 });
 </script>
