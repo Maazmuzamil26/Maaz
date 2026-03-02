@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -153,7 +154,6 @@ input,select,button{width:100%;padding:12px;margin-top:5px;border-radius:5px;bor
   <button onclick="showSection('home')">Home</button>
   <button onclick="showSection('offerings')">Offerings</button>
   <button onclick="showSection('curriculum')">Curriculum</button>
-  <button onclick="showSection('progress')">Progress</button>
   <button onclick="showSection('teachers')">Teachers</button>
   <button onclick="showSection('calendar')">Calendar</button>
   <button onclick="showSection('achievements')">Achievements</button>
@@ -423,8 +423,8 @@ input,select,button{width:100%;padding:12px;margin-top:5px;border-radius:5px;bor
       <tr><td>Level 1</td><td>Qaida</td><td>Basic rules and joining</td></tr>
       <tr><td>Level 2</td><td>Qaida</td><td>Reading full lines</td></tr>
       <tr><td>Level 3</td><td>Quran</td><td>Exams while looking at quran</td></tr>
-      <tr><td>Level 4</td><td>Juz amma</td><td>Exams while looking with little memorisation</td></tr>
-      <tr><td>Level 5</td><td>Full quran</td><td>Fully Hifz with top notch tajweed</td></tr>
+      <tr><td>Level 4</td><td>Advanced Tajweed</td><td>Exams while looking with little memorisation</td></tr>
+      <tr><td>Level 5</td><td>Leadership & Tafsir</td><td>Fully Hifz with top notch tajweed</td></tr>
     </table>
   </div>
 </section>
@@ -578,18 +578,23 @@ function toggleLanguage(){
 }
 /* ===== Tabs ===== */
 function showSection(id){
+  // Block Progress tab for non-admins
+  if(id === "progress" && !adminLoggedIn){
+    showToast("Access denied: Admin only");
+    return;
+  }
 
-  // Hide ALL sections everywhere
-  document.querySelectorAll("section").forEach(sec=>{
+  // Hide all sections
+  document.querySelectorAll("section").forEach(sec => {
     sec.classList.remove("active");
   });
 
-  // Show selected one
+  // Show the requested section
   const selected = document.getElementById(id);
-  if(selected){
-    selected.classList.add("active");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+  if(selected) selected.classList.add("active");
+
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 /* ============================= */
 /* 🔐 IMPROVED ADMIN SYSTEM */
@@ -620,6 +625,18 @@ async function adminLogin(){
     showToast("Admin logged in!");
   } else {
     showToast("Incorrect PIN");
+  }
+}
+function addAdminTabs() {
+  if(adminLoggedIn){
+    const topNav = document.querySelector(".top-nav");
+    if(!document.getElementById("adminProgressBtn")){
+      const btn = document.createElement("button");
+      btn.id = "adminProgressBtn";
+      btn.textContent = "Progress";
+      btn.onclick = () => showSection('progress');
+      topNav.appendChild(btn);
+    }
   }
 }
 
@@ -801,6 +818,7 @@ window.addEventListener("DOMContentLoaded", () => {
   loadSavedContent();
   showAdminPanel();
   displayProgress();
+  addAdminTabs();          // <-- Add admin-only buttons
   showSection("home");
 });
 </script>
@@ -808,3 +826,4 @@ window.addEventListener("DOMContentLoaded", () => {
 <button id="adminCornerBtn" onclick="showSection('admin')">⚙</button>
 </body>
 </html>
+
