@@ -9,6 +9,34 @@
 <meta name="theme-color" content="#046d4a">
 
 <style>
+
+/* ===== Top Right Multi-row Tabs ===== */
+.top-nav {
+  position: fixed;
+  top: 10px;           /* small space from top */
+  right: 10px;         /* stick to right */
+  display: flex;
+  gap: 4px;            /* tiny gap between buttons */
+  z-index: 1000;
+}
+
+.top-nav button {
+  background: #1b8b57;
+  color: white;
+  border: none;
+  padding: 4px 6px;       /* very small padding */
+  font-size: 10px;         /* tiny font */
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.top-nav button:hover {
+  background: #28a063;
+  transform: translateY(-1px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
 #adminCornerBtn{
   position:fixed;
   bottom:15px;
@@ -121,6 +149,24 @@ input,select,button{width:100%;padding:12px;margin-top:5px;border-radius:5px;bor
 <body lang="en">
 
 <header>
+<div class="top-nav">
+  <button onclick="showSection('home')">Home</button>
+  <button onclick="showSection('offerings')">Offerings</button>
+  <button onclick="showSection('curriculum')">Curriculum</button>
+  <button onclick="showSection('progress')">Progress</button>
+  <button onclick="showSection('teachers')">Teachers</button>
+  <button onclick="showSection('calendar')">Calendar</button>
+  <button onclick="showSection('achievements')">Achievements</button>
+  <button onclick="showSection('resources')">Resources</button>
+  <button onclick="showSection('outcomes')">Outcomes</button>
+  <button onclick="showSection('pathway')">Pathway</button>
+  <button onclick="showSection('assessments')">Assessments</button>
+  <button onclick="showSection('parents')">Parents</button>
+  <button onclick="showSection('character')">Character</button>
+  <button onclick="showSection('timetable')">Timetable</button>
+  <button onclick="showSection('policies')">Policies</button>
+  <button onclick="showSection('admin')">Admin</button>
+</div>
 <img src="ukim-logo.png" alt="Umar Masjid Madrassah Logo">
 <h1 data-en="Umar Masjid Madrassah" data-ar="مدرسة مسجد عمر" data-ur="عمر مسجد مدرسہ">Umar Masjid Madrassah</h1>
 <p class="dua" data-en="Rabbi zidni ‘ilmā — My Lord, increase me in knowledge."
@@ -129,312 +175,12 @@ input,select,button{width:100%;padding:12px;margin-top:5px;border-radius:5px;bor
    Rabbi zidni ‘ilmā — My Lord, increase me in knowledge.
 </p>
 
-<nav class="nav-bar">
-<ul>
-<li><button onclick="showSection('home')" data-en="Home" data-ar="الصفحة الرئيسية" data-ur="ہوم">Home</button></li>
-<li><button onclick="showSection('offerings')" data-en="What We Offer" data-ar="ما نقدمه" data-ur="ہم کیا پیش کرتے ہیں">What We Offer</button></li>
-<li><button onclick="showSection('announcements')" data-en="Announcements" data-ar="الإعلانات" data-ur="اعلانات">Announcements</button></li>
-<li><button onclick="openModal()" data-en="Register" data-ar="التسجيل" data-ur="رجسٹر کریں">Register</button></li>
-<li><button onclick="showSection('curriculum')">Curriculum</button></li>
-<li><button onclick="showSection('progress')">Student Progress</button></li>
-<li><button onclick="showSection('resources')">Resources</button></li>
-<li><button onclick="showSection('calendar')">Calendar</button></li>
-<li><button onclick="showSection('teachers')">Teachers</button></li>
-<li><button onclick="showSection('achievements')">Achievements</button></li>
-</ul>
-</nav>
-
 <div class="controls">
 <button onclick="toggleDarkMode()">🌙</button>
 <button onclick="toggleLanguage()">🌍</button>
 </div>
 </header>
-<!-- ================= CURRICULUM ================= -->
-<section id="curriculum">
-<h2 data-en="Structured Curriculum"
-    data-ar="المنهج المنظم"
-    data-ur="منظم نصاب">
-Structured Curriculum
-</h2>
 
-<div class="cards">
-
-<div class="card">
-<h3 data-en="Children (5–10)"
-    data-ar="الأطفال (5–10)"
-    data-ur="بچے (5–10)">
-Children (5–10)
-</h3>
-<ul>
-<li data-en="Arabic Alphabet & Reading" data-ar="الحروف العربية والقراءة" data-ur="عربی حروف اور پڑھنا">Arabic Alphabet & Reading</li>
-<li data-en="Short Surah Memorisation" data-ar="حفظ السور القصيرة" data-ur="چھوٹی سورتوں کا حفظ">Short Surah Memorisation</li>
-<li data-en="Basic Salah & Duas" data-ar="أساسيات الصلاة والأدعية" data-ur="نماز اور دعائیں">Basic Salah & Duas</li>
-<li data-en="Islamic Manners" data-ar="الآداب الإسلامية" data-ur="اسلامی آداب">Islamic Manners</li>
-</ul>
-</div>
-
-<div class="card">
-<h3 data-en="Youth (11–16)"
-    data-ar="الشباب (11–16)"
-    data-ur="نوجوان (11–16)">
-Youth (11–16)
-</h3>
-<ul>
-<li data-en="Tajweed Rules" data-ar="أحكام التجويد" data-ur="تجوید کے قواعد">Tajweed Rules</li>
-<li data-en="Fiqh of Worship" data-ar="فقه العبادات" data-ur="فقہ عبادات">Fiqh of Worship</li>
-<li data-en="Seerah Studies" data-ar="دراسة السيرة" data-ur="سیرت کا مطالعہ">Seerah Studies</li>
-<li data-en="Public Speaking" data-ar="مهارات الخطابة" data-ur="تقریر کی مہارت">Public Speaking</li>
-</ul>
-</div>
-
-<div class="card">
-<h3 data-en="Adults"
-    data-ar="الكبار"
-    data-ur="بالغ">
-Adults
-</h3>
-<ul>
-<li data-en="Advanced Tajweed" data-ar="التجويد المتقدم" data-ur="اعلیٰ تجوید">Advanced Tajweed</li>
-<li data-en="Tafsir Introduction" data-ar="مقدمة في التفسير" data-ur="تفسیر کا تعارف">Tafsir Introduction</li>
-<li data-en="Hadith Studies" data-ar="دراسة الحديث" data-ur="حدیث کا مطالعہ">Hadith Studies</li>
-<li data-en="Community Leadership" data-ar="القيادة المجتمعية" data-ur="کمیونٹی قیادت">Community Leadership</li>
-</ul>
-</div>
-
-</div>
-</section>
-
-<!-- ================= PROGRESS ================= -->
-<section id="progress">
-<h2 data-en="Student Progress Tracker"
-    data-ar="متابعة تقدم الطلاب"
-    data-ur="طلبہ کی پیشرفت">
-Student Progress Tracker
-</h2>
-
-<div class="card">
-<input type="text" id="studentName"
- placeholder="Student Name"
- data-en-placeholder="Student Name"
- data-ar-placeholder="اسم الطالب"
- data-ur-placeholder="طالب کا نام">
-
-<input type="text" id="memorisation"
- placeholder="Surahs Completed"
- data-en-placeholder="Surahs Completed"
- data-ar-placeholder="السور المكتملة"
- data-ur-placeholder="مکمل سورتیں">
-
-<input type="text" id="attendance"
- placeholder="Attendance %"
- data-en-placeholder="Attendance %"
- data-ar-placeholder="نسبة الحضور %"
- data-ur-placeholder="حاضری %">
-
-<button onclick="saveProgress()"
- data-en="Save Progress"
- data-ar="حفظ التقدم"
- data-ur="پیشرفت محفوظ کریں">
-Save Progress
-</button>
-
-<button onclick="generateCertificate()"
- data-en="Generate Certificate"
- data-ar="إنشاء شهادة"
- data-ur="سرٹیفکیٹ بنائیں">
-Generate Certificate
-</button>
-</div>
-
-<div id="progressList"></div>
-</section>
-
-<!-- ================= TEACHERS ================= -->
-<section id="teachers">
-<h2 data-en="Our Teachers"
-    data-ar="معلمونا"
-    data-ur="ہمارے اساتذہ">
-Our Teachers
-</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>Ustadh Hicham</h3>
-<p data-en="10 years teaching experience. Specialised in Tajweed & Arabic understanding."
-   data-ar="خبرة 10 سنوات في التدريس ومتخصص في التجويد وفهم اللغة العربية."
-   data-ur="10 سالہ تدریسی تجربہ، تجوید اور عربی فہم میں مہارت۔">
-10 years teaching experience. Specialised in Tajweed & Arabic understanding.
-</p>
-</div>
-
-<div class="card">
-<h3>Ustadh Abdul Wali</h3>
-<p data-en="Hifz specialist. Great attitude towards Hifz class."
-   data-ar="متخصص في الحفظ ويتمتع بروح إيجابية."
-   data-ur="حفظ کے ماہر اور بہترین انداز تدریس رکھتے ہیں۔">
-Hifz specialist. Great attitude towards Hifz class.
-</p>
-</div>
-
-<div class="card">
-<h3>Ustadha Ruskhana</h3>
-<p data-en="Experienced female youth teacher."
-   data-ar="معلمة خبيرة لفئة الشباب."
-   data-ur="نوجوان لڑکیوں کی تجربہ کار معلمہ۔">
-Experienced female youth teacher.
-</p>
-</div>
-
-<div class="card">
-<h3>Ustadh Muhammad Tayeb</h3>
-<p data-en="Head teacher with strong leadership skills."
-   data-ar="مدرس أول يتمتع بمهارات قيادية قوية."
-   data-ur="ہیڈ ٹیچر، مضبوط قیادت کی صلاحیتوں کے ساتھ۔">
-Head teacher with strong leadership skills.
-</p>
-</div>
-
-<div class="card">
-<h3>Ustadha Naila</h3>
-<p data-en="Event organiser and class helper."
-   data-ar="منظمة فعاليات ومساعدة صف."
-   data-ur="تقریبات کی منتظم اور کلاس معاون۔">
-Event organiser and class helper.
-</p>
-</div>
-
-<div class="card">
-<h3>Ustadha Aisha</h3>
-<p data-en="Young girls class teacher."
-   data-ar="معلمة صف الفتيات."
-   data-ur="لڑکیوں کی کلاس کی معلمہ۔">
-Young girls class teacher.
-</p>
-</div>
-
-</div>
-</section>
-
-<!-- ================= CALENDAR ================= -->
-<section id="calendar">
-<h2 data-en="Academic Calendar"
-    data-ar="التقويم الأكاديمي"
-    data-ur="تعلیمی کیلنڈر">
-Academic Calendar
-</h2>
-<ul>
-<li data-en="Spring Term: March – June"
-    data-ar="الفصل الربيعي: مارس – يونيو"
-    data-ur="اسپرنگ ٹرم: مارچ تا جون">
-Spring Term: March – June
-</li>
-
-<li data-en="Ramadan Program: Special Schedule"
-    data-ar="برنامج رمضان: جدول خاص"
-    data-ur="رمضان پروگرام: خصوصی شیڈول">
-Ramadan Program: Special Schedule
-</li>
-
-<li data-en="Exams: End of Each Term"
-    data-ar="الاختبارات: نهاية كل فصل"
-    data-ur="امتحانات: ہر ٹرم کے اختتام پر">
-Exams: End of Each Term
-</li>
-
-<li data-en="Eid Break: Announced yearly"
-    data-ar="عطلة العيد: تُعلن سنويًا"
-    data-ur="عید کی تعطیلات: سالانہ اعلان">
-Eid Break: Announced yearly
-</li>
-</ul>
-</section>
-
-<!-- ================= ACHIEVEMENTS ================= -->
-<section id="achievements">
-<h2 data-en="Student Achievements"
-    data-ar="إنجازات الطلاب"
-    data-ur="طلبہ کی کامیابیاں">
-Student Achievements
-</h2>
-
-<div class="cards">
-<div class="card">
-<h3 data-en="Student of the Month"
-    data-ar="طالب الشهر"
-    data-ur="مہینے کا بہترین طالب علم">
-Student of the Month
-</h3>
-<p data-en="Coming soon"
-   data-ar="قريبًا"
-   data-ur="جلد آرہا ہے">
-Coming soon
-</p>
-</div>
-
-<div class="card">
-<h3 data-en="Hifz Milestones"
-    data-ar="إنجازات الحفظ"
-    data-ur="حفظ کے سنگ میل">
-Hifz Milestones
-</h3>
-<p data-en="Track major memorisation achievements"
-   data-ar="متابعة إنجازات الحفظ الكبيرة"
-   data-ur="اہم حفظ کی کامیابیوں کا ریکارڈ">
-Track major memorisation achievements
-</p>
-</div>
-</div>
-</section>
-
-<!-- ================= RESOURCES ================= -->
-<section id="resources">
-<h2 data-en="Learning Resources"
-    data-ar="الموارد التعليمية"
-    data-ur="تعلیمی وسائل">
-Learning Resources
-</h2>
-
-<ul>
-<li data-en="Printable Tajweed Chart"
-    data-ar="مخطط التجويد القابل للطباعة"
-    data-ur="پرنٹ ایبل تجوید چارٹ">
-Printable Tajweed Chart
-</li>
-
-<li data-en="Homework Sheets"
-    data-ar="أوراق الواجب"
-    data-ur="ہوم ورک شیٹس">
-Homework Sheets
-</li>
-
-<li data-en="Recommended Reading"
-    data-ar="قراءة موصى بها"
-    data-ur="تجویز کردہ کتب">
-Recommended Reading
-<ul>
-<li data-en="Islamic Studies Level 1–10"
-    data-ar="الدراسات الإسلامية المستوى 1–10"
-    data-ur="اسلامک اسٹڈیز لیول 1–10">
-Islamic Studies Level 1–10
-</li>
-<li data-en="Quran and Qaida"
-    data-ar="القرآن والقاعدة"
-    data-ur="قرآن اور قائدہ">
-Quran and Qaida
-</li>
-</ul>
-</li>
-</ul>
-</section>
-
-</div>
-
-  </div>
-<main id="mainContent">
-  <div id="contentArea">
-</div>
-</div>
 <main id="mainContent">
   <div id="contentArea">
 <!-- ================= HOME ================= -->
@@ -627,6 +373,125 @@ Quran and Qaida
     <li>Homework Sheets</li>
     <li>Recommended Reading</li>
   </ul>
+</section>
+
+<!-- ================= LEARNING OUTCOMES ================= -->
+<section id="outcomes">
+  <h2>Learning Outcomes</h2>
+  <div class="cards">
+
+    <div class="card">
+      <h3>Children (5–10)</h3>
+      <ul>
+        <li>Read basic Arabic fluently</li>
+        <li>Memorise 15 short surahs with tajweed</li>
+        <li>Perform salah correctly</li>
+        <li>Demonstrate Islamic manners</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Youth (11–16)</h3>
+      <ul>
+        <li>Apply tajweed rules confidently</li>
+        <li>Understand core fiqh rulings</li>
+        <li>Know major seerah events</li>
+        <li>Deliver short Islamic talks</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Adults</h3>
+      <ul>
+        <li>Recite Qur’an with advanced tajweed</li>
+        <li>Understand tafsir basics</li>
+        <li>Study selected hadith</li>
+        <li>Develop leadership skills</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= LEVEL PATHWAY ================= -->
+<section id="pathway">
+  <h2>Structured Level Pathway</h2>
+  <div class="card">
+    <table border="1" width="100%" cellpadding="8">
+      <tr><th>Level</th><th>Focus</th><th>Assessment</th></tr>
+      <tr><td>Level 0</td><td>Qaida</td><td>Simple letters</td></tr>
+      <tr><td>Level 1</td><td>Qaida</td><td>Basic rules and joining</td></tr>
+      <tr><td>Level 2</td><td>Qaida</td><td>Reading full lines</td></tr>
+      <tr><td>Level 3</td><td>Quran</td><td>Exams while looking at quran</td></tr>
+      <tr><td>Level 4</td><td>Advanced Tajweed</td><td>Exams while looking with little memorisation</td></tr>
+      <tr><td>Level 5</td><td>Leadership & Tafsir</td><td>Fully Hifz with top notch tajweed</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= ASSESSMENTS ================= -->
+<section id="assessments">
+  <h2>Assessment System</h2>
+  <div class="card">
+    <ul>
+      <li>Termly Oral Recitation Test</li>
+      <li>Written Islamic Studies Exam</li>
+      <li>Behaviour & Manners Evaluation</li>
+      <li>Annual Graduation Ceremony</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= PARENT ENGAGEMENT ================= -->
+<section id="parents">
+  <h2>Parent Engagement</h2>
+  <div class="card">
+    <ul>
+      <li>Termly Parent-Teacher Meetings</li>
+      <li>Monthly Progress Updates</li>
+      <li>Homework Revision Guides</li>
+      <li>WhatsApp Broadcast Updates</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= CHARACTER DEVELOPMENT ================= -->
+<section id="character">
+  <h2>Character Development Programme</h2>
+  <div class="card">
+    <ul>
+      <li>Monthly Islamic Value Focus</li>
+      <li>Student of the Month (Akhlaq Based)</li>
+      <li>Reward System for Good Manners</li>
+      <li>Community Service Projects</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= WEEKLY TIMETABLE ================= -->
+<section id="timetable">
+  <h2>Weekly Timetable</h2>
+  <div class="card">
+    <table border="1" width="100%" cellpadding="8">
+      <tr><th>Day</th><th>Subject</th><th>Time</th></tr>
+      <tr><td>Monday</td><td>Qur’an</td><td>5–6 PM</td></tr>
+      <tr><td>Wednesday</td><td>Islamic Studies</td><td>5–6 PM</td></tr>
+      <tr><td>Saturday</td><td>Hifz Class</td><td>10–12 PM</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= POLICIES ================= -->
+<section id="policies">
+  <h2>Safeguarding & Policies</h2>
+  <div class="card">
+    <ul>
+      <li>Safeguarding Policy</li>
+      <li>Behaviour Policy</li>
+      <li>Attendance Policy</li>
+      <li>Complaints Procedure</li>
+    </ul>
+  </div>
 </section>
 
 <!-- ================= ADMIN ================= -->
@@ -885,11 +750,13 @@ function saveProgress(){
   let name = document.getElementById("studentName").value;
   let mem = document.getElementById("memorisation").value;
   let att = document.getElementById("attendance").value;
+  let taj = document.getElementById("tajweed").value;
+  let com = document.getElementById("comments").value;
 
   if(!name) return showToast("Enter student name");
 
   let list = JSON.parse(localStorage.getItem("progressData")||"[]");
-  list.push({name,mem,att});
+  list.push({name,mem,att,taj,com});
   localStorage.setItem("progressData",JSON.stringify(list));
 
   displayProgress();
@@ -901,14 +768,16 @@ function displayProgress(){
   let container = document.getElementById("progressList");
   container.innerHTML = "";
   data.forEach(s=>{
-    container.innerHTML += `<div class="card">
-      <strong>${s.name}</strong><br>
-      Surahs: ${s.mem}<br>
-      Attendance: ${s.att}
-    </div>`;
+    container.innerHTML += `
+      <div class="card">
+        <strong>${s.name}</strong><br>
+        Surahs: ${s.mem}<br>
+        Attendance: ${s.att}%<br>
+        Tajweed: ${s.taj}/5<br>
+        Comments: ${s.com}
+      </div>`;
   });
 }
-
 window.addEventListener("load",displayProgress);
 function generateCertificate(){
   let name = document.getElementById("studentName").value;
@@ -916,14 +785,18 @@ function generateCertificate(){
 
   let win = window.open();
   win.document.write(`
-    <h1 style="text-align:center">Certificate of Completion</h1>
-    <p style="text-align:center">This certifies that</p>
-    <h2 style="text-align:center">${name}</h2>
-    <p style="text-align:center">has successfully completed their level at Umar Masjid Madrassah.</p>
+    <div style="text-align:center;padding:40px;font-family:sans-serif">
+      <h1>Certificate of Achievement</h1>
+      <h2>${name}</h2>
+      <p>Has successfully completed their level at</p>
+      <h3>Umar Masjid Madrassah</h3>
+      <p>With dedication and excellent effort.</p>
+      <br><br>
+      <p>Date: ${new Date().toLocaleDateString()}</p>
+    </div>
   `);
   win.print();
 }
-
 window.addEventListener("DOMContentLoaded", () => {
   loadSavedContent();
   showAdminPanel();
