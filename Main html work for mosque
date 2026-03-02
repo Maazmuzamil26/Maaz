@@ -423,8 +423,8 @@ input,select,button{width:100%;padding:12px;margin-top:5px;border-radius:5px;bor
       <tr><td>Level 1</td><td>Qaida</td><td>Basic rules and joining</td></tr>
       <tr><td>Level 2</td><td>Qaida</td><td>Reading full lines</td></tr>
       <tr><td>Level 3</td><td>Quran</td><td>Exams while looking at quran</td></tr>
-      <tr><td>Level 4</td><td>Advanced Tajweed</td><td>Exams while looking with little memorisation</td></tr>
-      <tr><td>Level 5</td><td>Leadership & Tafsir</td><td>Fully Hifz with top notch tajweed</td></tr>
+      <tr><td>Level 4</td><td>Juz amma</td><td>Exams while looking with little memorisation</td></tr>
+      <tr><td>Level 5</td><td>Full quran</td><td>Fully Hifz with top notch tajweed</td></tr>
     </table>
   </div>
 </section>
