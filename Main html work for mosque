@@ -2,6 +2,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -171,7 +172,9 @@ input,select,button{width:100%;padding:12px;margin-top:5px;border-radius:5px;bor
 <button onclick="showSection('character')" data-en="Character" data-ar="الأخلاق">Character</button>
 <button onclick="showSection('policies')" data-en="Policies" data-ar="السياسات">Policies</button>
 <button onclick="showSection('admin')" data-en="Admin" data-ar="الإدارة">Admin</button>
-
+<button onclick="showSection('students')"data-en="Students"data-ar="الطلاب"data-ur="طلبہ">Students</button>
+<button onclick="showSection('attendance')"data-en="Attendance" data-ar="متابعة الحضور" data-ur="حاضری">Attendance
+</button>
 <button onclick="toggleLang()">🌐</button>
 </div>
 <img src="ukim-logo.png" alt="Logo">
@@ -182,6 +185,14 @@ data-ar="مدرسة مسجد عمر"
 data-ur="عمر مسجد مدرسہ">
 Umar Masjid Madrassah
 </h1>
+
+<p class="tagline"
+data-en="Excellence in Qur'an, Knowledge and Character"
+data-ar="التميز في القرآن والعلم والأخلاق"
+data-ur="قرآن، علم اور کردار میں بہترین تعلیم">
+Excellence in Qur'an, Knowledge and Character
+</p>
+
 
 <p class="dua"
 data-en="Rabbi zidni ‘ilmā — My Lord, increase me in knowledge."
@@ -434,6 +445,76 @@ Generate Certificate
 </div>
 
 <div id="progressList"></div>
+</section>
+
+<section id="students">
+
+<h2>Student Database</h2>
+
+<div class="card">
+
+<input type="text" id="dbName" placeholder="Student Name">
+<input type="number" id="dbAge" placeholder="Age">
+
+<select id="dbLevel">
+<option value="">Select Level</option>
+<option>Level 0</option>
+<option>Level 1</option>
+<option>Level 2</option>
+<option>Level 3</option>
+<option>Level 4</option>
+<option>Level 5</option>
+</select>
+
+<input type="text" id="dbParent" placeholder="Parent Name">
+
+<input type="tel" id="dbPhone" placeholder="Parent Phone">
+
+<button onclick="addStudent()" class="primary">
+Add Student
+</button>
+
+</div>
+
+<div id="studentList"></div>
+
+</section>
+
+<section id="attendance">
+
+<h2
+data-en="Attendance Tracker"
+data-ar="متابعة الحضور"
+data-ur="حاضری ٹریکر">
+Attendance Tracker
+</h2>
+
+<div class="card">
+
+<select id="attStudent">
+<option>Select Student</option>
+</select>
+
+<div style="margin-top:15px">
+
+<button onclick="markAttendance('present')" class="primary">
+Present
+</button>
+
+<button onclick="markAttendance('absent')" class="secondary">
+Absent
+</button>
+
+<button onclick="markAttendance('late')" class="secondary">
+Late
+</button>
+
+</div>
+
+</div>
+
+<div id="attendanceList"></div>
+
 </section>
 
 <!-- ================= TEACHERS ================= -->
@@ -1057,23 +1138,25 @@ function toggleLanguage(){
 }
 /* ===== Tabs ===== */
 function showSection(id){
-  // Block Progress tab for non-admins
-  if(id === "progress" && !adminLoggedIn){
+
+  // Admin-only sections
+  const adminOnly = ["progress","students","attendance"];
+
+  if(adminOnly.includes(id) && !adminLoggedIn){
     showToast("Access denied: Admin only");
     return;
   }
 
   // Hide all sections
-  document.querySelectorAll("section").forEach(sec => {
+  document.querySelectorAll("section").forEach(sec=>{
     sec.classList.remove("active");
   });
 
-  // Show the requested section
+  // Show selected section
   const selected = document.getElementById(id);
   if(selected) selected.classList.add("active");
 
-  // Scroll to top
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 /* ============================= */
 /* 🔐 IMPROVED ADMIN SYSTEM */
@@ -1097,14 +1180,13 @@ async function adminLogin(){
   const input = document.getElementById("adminPinInput").value;
   const hashedInput = await hashText(input);
 
-  if(hashedInput === ADMIN_HASH){
-    localStorage.setItem("adminLoggedIn","true");
-    adminLoggedIn = true;
-    showAdminPanel();
-    showToast("Admin logged in!");
-  } else {
-    showToast("Incorrect PIN");
-  }
+if(hashedInput === ADMIN_HASH){
+  localStorage.setItem("adminLoggedIn","true");
+  adminLoggedIn = true;
+  showAdminPanel();
+  addAdminTabs();
+  showToast("Admin logged in!");
+}
 }
 function addAdminTabs() {
   if(adminLoggedIn){
@@ -1275,6 +1357,139 @@ function displayProgress(){
   });
 }
 window.addEventListener("load",displayProgress);
+
+function addStudent(){
+
+let name=document.getElementById("dbName").value;
+let age=document.getElementById("dbAge").value;
+let level=document.getElementById("dbLevel").value;
+let parent=document.getElementById("dbParent").value;
+let phone=document.getElementById("dbPhone").value;
+
+if(!name || !level) return showToast("Enter student details");
+
+let students=JSON.parse(localStorage.getItem("students")||"[]");
+
+students.push({
+name:name,
+age:age,
+level:level,
+parent:parent,
+phone:phone
+});
+
+localStorage.setItem("students",JSON.stringify(students));
+
+displayStudents();
+
+showToast("Student added");
+
+document.getElementById("dbName").value="";
+document.getElementById("dbAge").value="";
+document.getElementById("dbParent").value="";
+document.getElementById("dbPhone").value="";
+}
+
+function displayStudents(){
+
+let students=JSON.parse(localStorage.getItem("students")||"[]");
+
+let container=document.getElementById("studentList");
+
+container.innerHTML="";
+
+students.forEach((s,i)=>{
+
+container.innerHTML+=`
+
+<div class="card">
+
+<strong>${s.name}</strong><br>
+
+Age: ${s.age}<br>
+
+Level: ${s.level}<br>
+
+Parent: ${s.parent}<br>
+
+Phone: ${s.phone}
+
+</div>
+
+`;
+
+});
+
+}
+
+
+function loadAttendanceStudents(){
+
+let students = JSON.parse(localStorage.getItem("students")||"[]");
+
+let select = document.getElementById("attStudent");
+
+if(!select) return;
+
+select.innerHTML="<option>Select Student</option>";
+
+students.forEach(s=>{
+select.innerHTML+=`<option>${s.name}</option>`;
+});
+
+}
+
+function markAttendance(status){
+
+let student=document.getElementById("attStudent").value;
+
+if(!student) return showToast("Select student");
+
+let data=JSON.parse(localStorage.getItem("attendance")||"[]");
+
+data.push({
+student:student,
+status:status,
+date:new Date().toLocaleDateString()
+});
+
+localStorage.setItem("attendance",JSON.stringify(data));
+
+displayAttendance();
+
+showToast("Attendance saved");
+
+}
+
+function displayAttendance(){
+
+let data=JSON.parse(localStorage.getItem("attendance")||"[]");
+
+let container=document.getElementById("attendanceList");
+
+if(!container) return;
+
+container.innerHTML="";
+
+data.reverse().forEach(a=>{
+
+container.innerHTML+=`
+
+<div class="card">
+
+<strong>${a.student}</strong><br>
+
+Status: ${a.status}<br>
+
+Date: ${a.date}
+
+</div>
+
+`;
+
+});
+
+}
 
 function generateCertificate(){
 
@@ -1465,11 +1680,17 @@ function generateCertificate(){
   setTimeout(() => win.print(), 500);
 }
 window.addEventListener("DOMContentLoaded", () => {
-  loadSavedContent();
-  showAdminPanel();
-  displayProgress();
-  addAdminTabs();          // <-- Add admin-only buttons
-  showSection("home");
+
+loadSavedContent();
+showAdminPanel();
+displayProgress();
+displayStudents();
+displayAttendance();
+loadAttendanceStudents();
+
+addAdminTabs();
+showSection("home");
+
 });
 </script>
 
