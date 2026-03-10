@@ -3,6 +3,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +36,13 @@
 #adminCornerBtn:hover{
   opacity:1;
   transform:scale(1.1);
+}
+
+header img{
+  width:90px;
+  height:auto;
+  display:block;
+  margin:0 auto 10px auto;
 }
 /* ===== Reset & Base ===== */
 *{box-sizing:border-box;margin:0;padding:0}
@@ -99,8 +107,6 @@ section {
 
 section.active {
   display: block;
-  animation: fadeUp .4s ease;
-}
   animation: fadeUp .4s ease;
 }
 section.active{display:block}
@@ -173,7 +179,9 @@ input,select,button{width:100%;padding:12px;margin-top:5px;border-radius:5px;bor
 <button onclick="showSection('policies')" data-en="Policies" data-ar="السياسات">Policies</button>
 <button onclick="showSection('admin')" data-en="Admin" data-ar="الإدارة">Admin</button>
 <button onclick="showSection('students')"data-en="Students"data-ar="الطلاب"data-ur="طلبہ">Students</button>
-<button onclick="showSection('attendance')"data-en="Attendance" data-ar="متابعة الحضور" data-ur="حاضری">Attendance
+<button onclick="showSection('attendance')"data-en="Attendance" data-ar="متابعة الحضور" data-ur="حاضری">Attendance</button>
+<button class="primary-btn" onclick="exportStudents()">
+Download Student List
 </button>
 <button onclick="toggleLang()">🌐</button>
 </div>
@@ -476,6 +484,7 @@ Add Student
 
 </div>
 
+<input type="text" id="studentSearch" placeholder="Search student..." onkeyup="searchStudents()">
 <div id="studentList"></div>
 
 </section>
@@ -1078,7 +1087,7 @@ Complaints must be taken to the head teacher formally
     <span class="close-btn" onclick="closeModal()">×</span>
     <h2 data-en="Register" data-ar="التسجيل" data-ur="رجسٹر کریں">Register</h2>
     
-    <form id="registerForm">
+    <form id="registerForm" action="https://formspree.io/f/xrelqrrp" method="POST">
       <label data-en="Full Name" data-ar="الاسم الكامل" data-ur="پورا نام">Full Name</label>
       <input type="text" name="name" placeholder="John Doe" required>
 
@@ -1302,24 +1311,56 @@ function closeModal(){document.getElementById("modal").style.display="none";rese
 /* ===== Form Handling ===== */
 const form=document.getElementById("registerForm");
 if(form){
-  form.addEventListener("submit",e=>{
+  form.addEventListener("submit", async (e)=>{
     e.preventDefault();
-    let data=new FormData(form);
-    let name=data.get("name").trim();
-    let age=parseInt(data.get("age"));
-    let phone=data.get("phone").trim();
-    let level=data.get("level");
-    if(name.length<3)return showToast("Invalid name");
-    if(age<3||age>80)return showToast("Invalid age");
-    if(!/^[0-9+\-\s()]+$/.test(phone))return showToast("Invalid phone");
-    if(!level)return showToast("Select level"); 
-    let regs=JSON.parse(localStorage.getItem("regs")||"[]");
-    regs.push({name,age,phone,level});
-    localStorage.setItem("regs",JSON.stringify(regs));
-    form.style.display="none";
-    document.getElementById("thankYou").style.display="block";
-    showToast("Registered successfully");
+
+    const data = new FormData(form);
+
+    const response = await fetch(form.action,{
+      method:"POST",
+      body:data,
+      headers:{ 'Accept':'application/json' }
+    });
+
+    if(response.ok){
+      form.style.display="none";
+      document.getElementById("thankYou").style.display="block";
+      showToast("Registration sent!");
+      form.reset();
+    }else{
+      showToast("Submission failed");
+    }
+
   });
+}
+
+function exportStudents(){
+
+let students = JSON.parse(localStorage.getItem("students") || "[]");
+
+if(students.length === 0){
+showToast("No students to export");
+return;
+}
+
+let csv = "Name,Age,Level,Parent,Phone\n";
+
+students.forEach(s=>{
+csv += `${s.name},${s.age},${s.level},${s.parent},${s.phone}\n`;
+});
+
+let blob = new Blob([csv], { type: "text/csv" });
+
+let link = document.createElement("a");
+
+link.href = URL.createObjectURL(blob);
+
+link.download = "students.csv";
+
+link.click();
+
+showToast("Students exported!");
+
 }
 
 function resetForm(){form.reset();form.style.display="block";document.getElementById("thankYou").style.display="none"}
@@ -1327,9 +1368,8 @@ function resetForm(){form.reset();form.style.display="block";document.getElement
 function saveProgress(){
   let name = document.getElementById("studentName").value;
   let mem = document.getElementById("memorisation").value;
-  let att = document.getElementById("attendance").value;
-  let taj = document.getElementById("tajweed").value;
-  let com = document.getElementById("comments").value;
+  let level = document.getElementById("levelCompleted").value;
+  let achievement = document.getElementById("achievementType").value;
 
   if(!name) return showToast("Enter student name");
 
@@ -1359,7 +1399,6 @@ function displayProgress(){
 window.addEventListener("load",displayProgress);
 
 function addStudent(){
-
 let name=document.getElementById("dbName").value;
 let age=document.getElementById("dbAge").value;
 let level=document.getElementById("dbLevel").value;
@@ -1485,6 +1524,35 @@ Date: ${a.date}
 
 </div>
 
+`;
+
+});
+
+}
+
+
+function searchStudents(){
+
+let search=document.getElementById("studentSearch").value.toLowerCase();
+
+let students=JSON.parse(localStorage.getItem("students")||"[]");
+
+let container=document.getElementById("studentList");
+
+container.innerHTML="";
+
+students
+.filter(s=>s.name.toLowerCase().includes(search))
+.forEach(s=>{
+
+container.innerHTML+=`
+<div class="card">
+<strong>${s.name}</strong><br>
+Age: ${s.age}<br>
+Level: ${s.level}<br>
+Parent: ${s.parent}<br>
+Phone: ${s.phone}
+</div>
 `;
 
 });
