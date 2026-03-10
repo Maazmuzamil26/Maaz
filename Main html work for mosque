@@ -14,33 +14,7 @@
 <style>
 
 /* ===== Top Right Multi-row Tabs ===== */
-.top-nav {
-  position: fixed;
-  top: 10px;           /* small space from top */
-  right: 10px;         /* stick to right */
-  display: flex;
-  gap: 4px;            /* tiny gap between buttons */
-  z-index: 1000;
-}
-
-.top-nav button {
-  background: #1b8b57;
-  color: white;
-  border: none;
-  padding: 4px 6px;       /* very small padding */
-  font-size: 10px;         /* tiny font */
-  font-weight: 500;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.top-nav button:hover {
-  background: #28a063;
-  transform: translateY(-1px);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-#adminCornerBtn{
+.top-nav { position: fixed; top: 10px; right: 10px; display: flex; gap: 4px; z-index: 1000; } .top-nav button { background: #1b8b57; color: white; border: none; padding: 4px 6px; /* very small padding */ font-size: 10px; /* tiny font */ font-weight: 500; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; } .top-nav button:hover { background: #28a063; transform: translateY(-1px); box-shadow: 0 1px 3px rgba(0,0,0,0.2); }#adminCornerBtn{
   position:fixed;
   bottom:15px;
   right:15px;
@@ -69,14 +43,27 @@ h1,h2,h3,p{margin-bottom:.8rem}
 a{text-decoration:none;color:inherit}
 
 /* ===== Header ===== */
-header{position:relative;text-align:center;padding:80px 20px 50px;background:linear-gradient(135deg,#046d4a,#025937);color:white;overflow:hidden}
-body.dark header{background:linear-gradient(135deg,#022f1f,#011f14)}
-header img{width:80px;position:absolute;top:20px;left:20px;animation:float 4s ease-in-out infinite,glow 3s ease-in-out infinite}
-@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
-@keyframes glow{0%{filter:drop-shadow(0 0 4px rgba(255,255,255,.4))}50%{filter:drop-shadow(0 0 12px rgba(255,255,255,.8))}100%{filter:drop-shadow(0 0 4px rgba(255,255,255,.4))}}
-header h1{font-size:3rem;margin-bottom:10px}
-.dua{margin-top:15px;font-size:1.2rem;opacity:.95}
+header{
+  position:relative;
+  text-align:center;
+  padding:100px 20px 70px;
+  background:linear-gradient(135deg,#046d4a,#025937);
+  color:white;
+  overflow:hidden;
+  box-shadow:0 6px 20px rgba(0,0,0,.2);
+}
 
+header h1{
+  font-size:3.2rem;
+  letter-spacing:1px;
+  font-weight:700;
+}
+
+.dua{
+  margin-top:10px;
+  font-size:1.1rem;
+  opacity:.9;
+}
 /* ===== Navigation ===== */
 .nav-bar ul{list-style:none;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;padding:0}
 .nav-bar li{display:inline-block}
@@ -122,10 +109,25 @@ body.dark section h2{color:#7fd1b2}
 
 /* ===== Cards ===== */
 .cards{display:flex;flex-wrap:wrap;gap:20px}
-.card{background:white;flex:1 1 300px;padding:25px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,.08);transition:transform .3s,box-shadow .3s}
-body.dark .card{background:#1b2f28}
-.card:hover{transform:translateY(-7px);box-shadow:0 12px 25px rgba(0,0,0,.12)}
+.card{
+  background:white;
+  flex:1 1 300px;
+  padding:28px;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  transition:all .3s ease;
+  border-top:4px solid #046d4a;
+}
 
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 40px rgba(0,0,0,.12);
+}
+
+.card h3{
+  margin-bottom:10px;
+  color:#046d4a;
+}
 /* ===== Buttons ===== */
 .primary{background:linear-gradient(135deg,#046d4a,#028a5e);color:white;padding:14px 35px;border-radius:40px;border:none;cursor:pointer;margin:5px}
 .secondary{background:#ddd;padding:14px 35px;border-radius:40px;border:none;cursor:pointer;margin:5px}
@@ -152,39 +154,26 @@ input,select,button{width:100%;padding:12px;margin-top:5px;border-radius:5px;bor
 <body lang="en">
 
 <header>
-
 <div class="top-nav">
-  <button onclick="showSection('home')"
-    data-en="Home"
-    data-ar="الرئيسية"
-    data-ur="ہوم">Home</button>
+<button onclick="showSection('home')" data-en="Home" data-ar="الرئيسية">Home</button>
+<button onclick="showSection('offerings')" data-en="Offerings" data-ar="البرامج">Offerings</button>
+<button onclick="showSection('announcements')" data-en="Announcements" data-ar="الإعلانات">Announcements</button>
+<button onclick="showSection('curriculum')" data-en="Curriculum" data-ar="المنهج">Curriculum</button>
+<button onclick="showSection('progress')" data-en="Progress" data-ar="التقدم">Progress</button>
+<button onclick="showSection('teachers')" data-en="Teachers" data-ar="المعلمين">Teachers</button>
+<button onclick="showSection('calendar')" data-en="Calendar" data-ar="التقويم">Calendar</button>
+<button onclick="showSection('achievements')" data-en="Achievements" data-ar="الإنجازات">Achievements</button>
+<button onclick="showSection('resources')" data-en="Resources" data-ar="المصادر">Resources</button>
+<button onclick="showSection('outcomes')" data-en="Outcomes" data-ar="النتائج">Outcomes</button>
+<button onclick="showSection('pathway')" data-en="Levels" data-ar="المستويات">Levels</button>
+<button onclick="showSection('assessments')" data-en="Assessments" data-ar="التقييمات">Assessments</button>
+<button onclick="showSection('parents')" data-en="Parents" data-ar="أولياء الأمور">Parents</button>
+<button onclick="showSection('character')" data-en="Character" data-ar="الأخلاق">Character</button>
+<button onclick="showSection('policies')" data-en="Policies" data-ar="السياسات">Policies</button>
+<button onclick="showSection('admin')" data-en="Admin" data-ar="الإدارة">Admin</button>
 
-  <button onclick="showSection('offerings')"
-    data-en="Offerings"
-    data-ar="البرامج"
-    data-ur="پیشکشیں">Offerings</button>
-
-  <button onclick="showSection('curriculum')"
-    data-en="Curriculum"
-    data-ar="المنهج"
-    data-ur="نصاب">Curriculum</button>
-
-  <button onclick="showSection('teachers')"
-    data-en="Teachers"
-    data-ar="المعلمون"
-    data-ur="اساتذہ">Teachers</button>
-
-  <button onclick="showSection('calendar')"
-    data-en="Calendar"
-    data-ar="التقويم"
-    data-ur="کیلنڈر">Calendar</button>
-
-  <button onclick="showSection('admin')"
-    data-en="Admin"
-    data-ar="الإدارة"
-    data-ur="ایڈمن">Admin</button>
+<button onclick="toggleLang()">🌐</button>
 </div>
-
 <img src="ukim-logo.png" alt="Logo">
 
 <h1 
@@ -746,18 +735,15 @@ Deliver short Islamic talks
 </ul>
 </div>
 
+<div class="card">
+  <h3>Adults</h3>
+  <ul>
+  <li>Recite Qur’an with advanced tajweed</li>
+  <li>Understand tafsir basics</li>
+  <li>Study selected hadith</li>
+  <li>Develop leadership skills</li>
+  </ul>
 </div>
-</section>
-
-    <div class="card">
-      <h3>Adults</h3>
-      <ul>
-        <li>Recite Qur’an with advanced tajweed</li>
-        <li>Understand tafsir basics</li>
-        <li>Study selected hadith</li>
-        <li>Develop leadership skills</li>
-      </ul>
-    </div>
 
   </div>
 </section>
