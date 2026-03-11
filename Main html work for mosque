@@ -4,6 +4,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,6 +94,55 @@ header h1{
 }.nav-bar button:hover{background:rgba(255,255,255,.2)}
 body.dark .nav-bar button{color:#a0f0c0}
 
+.dropdown{
+position:relative;
+display:inline-block;
+}
+
+.dropbtn{
+background:#1b8b57;
+color:white;
+border:none;
+padding:4px 6px;
+font-size:10px;
+border-radius:4px;
+cursor:pointer;
+}
+
+.dropdown-content{
+display:none;
+position:absolute;
+right:0;
+background:white;
+min-width:160px;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+border-radius:6px;
+z-index:1000;
+}
+
+.dropdown-content button{
+width:100%;
+text-align:left;
+background:none;
+border:none;
+padding:8px 10px;
+cursor:pointer;
+font-size:12px;
+}
+
+.dropdown-content button:hover{
+background:#f0f0f0;
+}
+
+.dropdown:hover .dropdown-content{
+display:block;
+}
+
+body.dark .dropdown-content{
+background:#1c2b26;
+color:white;
+}
+
 /* ===== Controls ===== */
 .controls{margin-top:15px;text-align:center}
 .controls button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:white;padding:8px 16px;border-radius:20px;cursor:pointer;margin:0 5px}
@@ -162,28 +212,185 @@ input,select,button{width:100%;padding:12px;margin-top:5px;border-radius:5px;bor
 
 <header>
 <div class="top-nav">
-<button onclick="showSection('home')" data-en="Home" data-ar="الرئيسية">Home</button>
-<button onclick="showSection('offerings')" data-en="Offerings" data-ar="البرامج">Offerings</button>
-<button onclick="showSection('announcements')" data-en="Announcements" data-ar="الإعلانات">Announcements</button>
-<button onclick="showSection('curriculum')" data-en="Curriculum" data-ar="المنهج">Curriculum</button>
-<button onclick="showSection('progress')" data-en="Progress" data-ar="التقدم">Progress</button>
-<button onclick="showSection('teachers')" data-en="Teachers" data-ar="المعلمين">Teachers</button>
-<button onclick="showSection('calendar')" data-en="Calendar" data-ar="التقويم">Calendar</button>
-<button onclick="showSection('achievements')" data-en="Achievements" data-ar="الإنجازات">Achievements</button>
-<button onclick="showSection('resources')" data-en="Resources" data-ar="المصادر">Resources</button>
-<button onclick="showSection('outcomes')" data-en="Outcomes" data-ar="النتائج">Outcomes</button>
-<button onclick="showSection('pathway')" data-en="Levels" data-ar="المستويات">Levels</button>
-<button onclick="showSection('assessments')" data-en="Assessments" data-ar="التقييمات">Assessments</button>
-<button onclick="showSection('parents')" data-en="Parents" data-ar="أولياء الأمور">Parents</button>
-<button onclick="showSection('character')" data-en="Character" data-ar="الأخلاق">Character</button>
-<button onclick="showSection('policies')" data-en="Policies" data-ar="السياسات">Policies</button>
-<button onclick="showSection('admin')" data-en="Admin" data-ar="الإدارة">Admin</button>
-<button onclick="showSection('students')"data-en="Students"data-ar="الطلاب"data-ur="طلبہ">Students</button>
-<button onclick="showSection('attendance')"data-en="Attendance" data-ar="متابعة الحضور" data-ur="حاضری">Attendance</button>
-<button class="primary-btn" onclick="exportStudents()">
-Download Student List
+
+<button onclick="showSection('home')" 
+data-en="Home" data-ar="الرئيسية" data-ur="ہوم">
+Home
 </button>
-<button onclick="toggleLang()">🌐</button>
+
+<div class="dropdown">
+
+<button class="dropbtn"
+data-en="Academics" 
+data-ar="الأكاديميات"
+data-ur="تعلیم">
+Academics
+</button>
+
+<div class="dropdown-content">
+
+<button onclick="showSection('curriculum')" 
+data-en="Curriculum"
+data-ar="المنهج"
+data-ur="نصاب">
+Curriculum
+</button>
+
+<button onclick="showSection('pathway')" 
+data-en="Levels"
+data-ar="المستويات"
+data-ur="سطح">
+Levels
+</button>
+
+<button onclick="showSection('assessments')" 
+data-en="Assessments"
+data-ar="التقييمات"
+data-ur="جائزے">
+Assessments
+</button>
+
+<button onclick="showSection('outcomes')" 
+data-en="Learning Outcomes"
+data-ar="مخرجات التعلم"
+data-ur="تعلیمی نتائج">
+Learning Outcomes
+</button>
+
+</div>
+</div>
+
+
+<div class="dropdown">
+
+<button class="dropbtn"
+data-en="Students"
+data-ar="الطلاب"
+data-ur="طلبہ">
+Students
+</button>
+
+<div class="dropdown-content">
+
+<button onclick="showSection('students')" 
+data-en="Student Database"
+data-ar="قاعدة بيانات الطلاب"
+data-ur="طلبہ ڈیٹابیس">
+Student Database
+</button>
+
+<button onclick="showSection('progress')" 
+data-en="Progress"
+data-ar="التقدم"
+data-ur="پیش رفت">
+Progress
+</button>
+
+<button onclick="showSection('attendance')" 
+data-en="Attendance"
+data-ar="الحضور"
+data-ur="حاضری">
+Attendance
+</button>
+
+<button onclick="showSection('achievements')" 
+data-en="Achievements"
+data-ar="الإنجازات"
+data-ur="کامیابیاں">
+Achievements
+</button>
+
+</div>
+</div>
+
+
+<div class="dropdown">
+
+<button class="dropbtn"
+data-en="Community"
+data-ar="المجتمع"
+data-ur="کمیونٹی">
+Community
+</button>
+
+<div class="dropdown-content">
+
+<button onclick="showSection('teachers')"
+data-en="Teachers"
+data-ar="المعلمين"
+data-ur="اساتذہ">
+Teachers
+</button>
+
+<button onclick="showSection('parents')"
+data-en="Parents"
+data-ar="أولياء الأمور"
+data-ur="والدین">
+Parents
+</button>
+
+<button onclick="showSection('character')"
+data-en="Character"
+data-ar="الأخلاق"
+data-ur="کردار">
+Character
+</button>
+
+</div>
+</div>
+
+
+<div class="dropdown">
+
+<button class="dropbtn"
+data-en="Information"
+data-ar="المعلومات"
+data-ur="معلومات">
+Information
+</button>
+
+<div class="dropdown-content">
+
+<button onclick="showSection('announcements')"
+data-en="Announcements"
+data-ar="الإعلانات"
+data-ur="اعلانات">
+Announcements
+</button>
+
+<button onclick="showSection('calendar')"
+data-en="Calendar"
+data-ar="التقويم"
+data-ur="کیلنڈر">
+Calendar
+</button>
+
+<button onclick="showSection('resources')"
+data-en="Resources"
+data-ar="المصادر"
+data-ur="وسائل">
+Resources
+</button>
+
+<button onclick="showSection('policies')"
+data-en="Policies"
+data-ar="السياسات"
+data-ur="پالیسیاں">
+Policies
+</button>
+
+</div>
+</div>
+
+<button onclick="showSection('admin')"
+data-en="Admin"
+data-ar="الإدارة"
+data-ur="انتظامیہ">
+Admin
+</button>
+
+<button onclick="toggleLanguage()">🌐</button>
+
 </div>
 <img src="ukim-logo.png" alt="Logo">
 
@@ -1366,21 +1573,30 @@ showToast("Students exported!");
 function resetForm(){form.reset();form.style.display="block";document.getElementById("thankYou").style.display="none"}
 
 function saveProgress(){
-  let name = document.getElementById("studentName").value;
-  let mem = document.getElementById("memorisation").value;
-  let level = document.getElementById("levelCompleted").value;
-  let achievement = document.getElementById("achievementType").value;
 
-  if(!name) return showToast("Enter student name");
+let name = document.getElementById("studentName").value;
+let mem = document.getElementById("memorisation").value;
+let att = document.getElementById("attendance").value;
+let level = document.getElementById("levelCompleted").value;
+let achievement = document.getElementById("achievementType").value;
 
-  let list = JSON.parse(localStorage.getItem("progressData")||"[]");
-  list.push({name,mem,att,taj,com});
-  localStorage.setItem("progressData",JSON.stringify(list));
+if(!name) return showToast("Enter student name");
 
-  displayProgress();
-  showToast("Progress saved");
+let list = JSON.parse(localStorage.getItem("progressData") || "[]");
+
+list.push({
+name:name,
+mem:mem,
+att:att,
+level:level,
+achievement:achievement
+});
+
+localStorage.setItem("progressData", JSON.stringify(list));
+
+displayProgress();
+showToast("Progress saved");
 }
-
 function displayProgress(){
   let data = JSON.parse(localStorage.getItem("progressData")||"[]");
   let container = document.getElementById("progressList");
@@ -1444,23 +1660,56 @@ container.innerHTML+=`
 <div class="card">
 
 <strong>${s.name}</strong><br>
-
 Age: ${s.age}<br>
-
 Level: ${s.level}<br>
-
 Parent: ${s.parent}<br>
-
 Phone: ${s.phone}
 
+<br><br>
+
+<button onclick="deleteStudent(${i})">Delete</button>
+
 </div>
-
 `;
-
 });
+}
+
+
+function backupDatabase(){
+
+let data={
+students:JSON.parse(localStorage.getItem("students")||"[]"),
+attendance:JSON.parse(localStorage.getItem("attendance")||"[]"),
+progress:JSON.parse(localStorage.getItem("progressData")||"[])
+};
+
+let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+
+let link=document.createElement("a");
+
+link.href=URL.createObjectURL(blob);
+
+link.download="madrassah_backup.json";
+
+link.click();
+
+showToast("Backup downloaded");
 
 }
 
+function deleteStudent(index){
+
+let students=JSON.parse(localStorage.getItem("students")||"[]");
+
+students.splice(index,1);
+
+localStorage.setItem("students",JSON.stringify(students));
+
+displayStudents();
+
+showToast("Student removed");
+
+}
 
 function loadAttendanceStudents(){
 
@@ -1556,6 +1805,27 @@ Phone: ${s.phone}
 `;
 
 });
+
+}
+
+
+function restoreBackup(file){
+
+let reader=new FileReader();
+
+reader.onload=function(){
+
+let data=JSON.parse(reader.result);
+
+localStorage.setItem("students",JSON.stringify(data.students||[]));
+localStorage.setItem("attendance",JSON.stringify(data.attendance||[]));
+localStorage.setItem("progressData",JSON.stringify(data.progress||[]));
+
+location.reload();
+
+};
+
+reader.readAsText(file);
 
 }
 
