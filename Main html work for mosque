@@ -113,7 +113,7 @@ cursor:pointer;
 display:none;
 position:absolute;
 right:0;
-background:white;
+background:#046d4a;
 min-width:160px;
 box-shadow:0 5px 15px rgba(0,0,0,.2);
 border-radius:6px;
@@ -128,7 +128,9 @@ border:none;
 padding:8px 10px;
 cursor:pointer;
 font-size:12px;
+color:white;
 }
+
 
 .dropdown-content button:hover{
 background:#f0f0f0;
@@ -203,6 +205,18 @@ input,select,button{width:100%;padding:12px;margin-top:5px;border-radius:5px;bor
 
 /* ===== Toast ===== */
 .toast{position:fixed;bottom:20px;right:20px;background:#046d4a;color:white;padding:12px 20px;border-radius:8px;display:none}
+
+.book-qr{
+text-align:center;
+margin-top:30px;
+font-size:14px;
+}
+
+.book-qr img{
+width:90px;
+height:90px;
+margin-top:5px;
+}
 
 /* ===== Responsive ===== */
 @media(max-width:600px){header h1{font-size:2.2rem}header img{position:static;margin-bottom:15px}.cards{flex-direction:column}.nav-bar ul{flex-direction:column;gap:10px}}
@@ -910,6 +924,22 @@ data-ur="حفظ کے سنگ میل">
 Hifz Milestones
 </h3>
 
+<div class="card">
+<h3
+data-en="Qur'an Memorisation Award"
+data-ar="جائزة حفظ القرآن"
+data-ur="حفظِ قرآن ایوارڈ">
+Qur'an Memorisation Award
+</h3>
+
+<p
+data-en="Awarded to students who memorise 5 or more Surahs with Tajweed."
+data-ar="تُمنح للطلاب الذين يحفظون 5 سور أو أكثر مع التجويد."
+data-ur="ان طلبہ کو دیا جاتا ہے جو تجوید کے ساتھ 5 یا اس سے زیادہ سورتیں حفظ کریں۔">
+Awarded to students who memorise 5 or more Surahs with Tajweed.
+</p>
+</div>
+
 <p
 data-en="Track major memorisation achievements"
 data-ar="تتبع إنجازات الحفظ الكبرى"
@@ -917,6 +947,56 @@ data-ur="اہم حفظ کامیابیوں کا ریکارڈ">
 Track major memorisation achievements
 </p>
 </div>
+
+<div class="card">
+<h3
+data-en="Excellent Attendance"
+data-ar="جائزة الحضور الممتاز"
+data-ur="بہترین حاضری ایوارڈ">
+Excellent Attendance
+</h3>
+
+<p
+data-en="Given to students who maintain 95% or higher attendance."
+data-ar="تُمنح للطلاب الذين يحافظون على حضور 95٪ أو أكثر."
+data-ur="ان طلبہ کو دیا جاتا ہے جن کی حاضری 95٪ یا اس سے زیادہ ہو۔">
+Given to students who maintain 95% or higher attendance.
+</p>
+</div>
+
+<div class="card">
+<h3
+data-en="Outstanding Character"
+data-ar="جائزة الأخلاق المتميزة"
+data-ur="بہترین اخلاق ایوارڈ">
+Outstanding Character
+</h3>
+
+<p
+data-en="Awarded for demonstrating excellent Islamic manners and respect."
+data-ar="تُمنح لإظهار الأخلاق الإسلامية الممتازة والاحترام."
+data-ur="اسلامی اخلاق اور احترام کا بہترین مظاہرہ کرنے پر دیا جاتا ہے۔">
+Awarded for demonstrating excellent Islamic manners and respect.
+</p>
+</div>
+
+<div class="card">
+<h3
+data-en="Best Recitation"
+data-ar="أفضل تلاوة"
+data-ur="بہترین تلاوت">
+Best Recitation
+</h3>
+
+<p
+data-en="Awarded to students who demonstrate beautiful and accurate Qur'an recitation."
+data-ar="تُمنح للطلاب الذين يظهرون تلاوة جميلة وصحيحة للقرآن."
+data-ur="ان طلبہ کو دیا جاتا ہے جو خوبصورت اور درست قرآن تلاوت کرتے ہیں۔">
+Awarded to students who demonstrate beautiful and accurate Qur'an recitation.
+</p>
+</div>
+
+
 
 </div>
 </section>
@@ -1329,6 +1409,21 @@ Complaints must be taken to the head teacher formally
   </div>
 </div>
 
+<div class="book-qr">
+
+<p
+data-en="Have a look at our Islamic Studies books"
+data-ar="اطلع على كتب الدراسات الإسلامية الخاصة بنا"
+data-ur="ہماری اسلامیات کی کتابیں دیکھیں">
+Have a look at our Islamic Studies books
+</p>
+
+<img 
+src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.albarakahbooks.com/cdn/shop/files/WeekendLearningIslamicStudies_1.png?v=1733698899&width=1445"
+alt="Islamic Studies Books QR Code">
+
+</div>
+
 <footer>© 2026 Umar Masjid Madrassah</footer>
 
 <script>
@@ -1364,7 +1459,7 @@ function showSection(id){
   }
 
   // Hide all sections
-  document.querySelectorAll("section").forEach(sec=>{
+  document.querySelectorAll("#contentArea section").forEach(sec=>{
     sec.classList.remove("active");
   });
 
@@ -1680,7 +1775,7 @@ function backupDatabase(){
 let data={
 students:JSON.parse(localStorage.getItem("students")||"[]"),
 attendance:JSON.parse(localStorage.getItem("attendance")||"[]"),
-progress:JSON.parse(localStorage.getItem("progressData")||"[])
+progress:JSON.parse(localStorage.getItem("progressData")||"[]")
 };
 
 let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
